@@ -53,12 +53,14 @@ const AuthProvider = ({ child }) => {
           // set token
         } else {
           // remove token
-          logOut().then(() => console.log("signout Successfully"));
         }
+        setLoading(false);
       });
     };
-    return () => unSubscribe();
-  }, []);
+    return () => {
+      unSubscribe();
+    };
+  }, [user]);
 
   const authInfo = {
     createUser,
