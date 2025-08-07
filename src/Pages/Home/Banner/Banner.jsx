@@ -1,22 +1,19 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import web from "../../../assets/web.jpg";
-import cProgramming from "../../../assets/c.jpg";
-import mobileApp from "../../../assets/mobileApp.jpg";
 
 const Banner = () => {
   const images = [
     {
       title: 'Learn Web Development',
-      image: web
+      image: 'https://i.ibb.co.com/6cFGNP5q/web.jpg'
     },
     {
       title: 'Learn Structured Programming',
-      image: cProgramming
+      image: 'https://i.ibb.co.com/vtJqPPQ/c.jpg'
     },
     {
       title: 'Learn Mobile App Development',
-      image: mobileApp
+      image: "https://i.ibb.co.com/RpsVhFbf/mobile-App.jpg"
     },
   ];
   return (
