@@ -6,13 +6,12 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase/firbase.config";
+import { useEffect, useState } from "react";
 import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { auth } from "../firebase/firebase.config";
+import AuthContext from "../context/authContext";
 
-export const AuthContext = createContext(null);
-
-const AuthProvider = ({ child }) => {
+const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -49,18 +48,13 @@ const AuthProvider = ({ child }) => {
     const unSubscribe = () => {
       onAuthStateChanged(auth, (currentUser) => {
         setUser(currentUser);
-        if (currentUser) {
-          // set token
-        } else {
-          // remove token
-        }
         setLoading(false);
       });
     };
     return () => {
       unSubscribe();
     };
-  }, [user]);
+  }, []);
 
   const authInfo = {
     createUser,
@@ -74,7 +68,7 @@ const AuthProvider = ({ child }) => {
     logOut,
   };
 
-  return <AuthContext.Provider value={authInfo}>{child}</AuthContext.Provider>;
+  return <AuthContext authInfo={authInfo} children={children}/>
 };
 
 export default AuthProvider;
