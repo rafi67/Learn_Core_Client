@@ -26,7 +26,7 @@ const Banner = () => {
       {/* carousel */}
       <Carousel autoPlay={true} infiniteLoop={true} useKeyboardArrows={true} emulateTouch={true}>
         {images.map((image) => (
-          <div className="h-[600px]">
+          <div className="h-[570px]">
             <img src={image.image} alt="" />
             <p className="legend">{image.title}</p>
           </div>
