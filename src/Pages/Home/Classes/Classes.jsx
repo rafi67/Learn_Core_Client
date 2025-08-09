@@ -13,6 +13,7 @@ const Classes = () => {
   const { data: Class = [] } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => await get("/classes").then((res) => res.data),
+    refetchOnWindowFocus: false,
   });
 
   return (
