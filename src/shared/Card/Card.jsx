@@ -1,12 +1,12 @@
 
 const Card = ({data}) => {
   return (
-    <div className="card w-80 shadow-2xl rounded-none bg-gray-300">
+    <div className="card w-[335px] rounded-none bg-gray-300">
       <figure>
         <img
           src={data.imageUrl}
           alt=""
-          className="h-[320px]"
+          className="w-full h-[320px]"
         />
       </figure>
       <div className="card-body">
