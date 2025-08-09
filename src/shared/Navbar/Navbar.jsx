@@ -58,13 +58,13 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a>Home</a>
+            <a className="hover:text-[#FDC800] hover:bg-transparent">Home</a>
           </li>
           <li>
-            <a>All Classes</a>
+            <a className="hover:text-[#FDC800] hover:bg-transparent">All Classes</a>
           </li>
           <li>
-            <a>Teach on LearnCore</a>
+            <a className="hover:text-[#FDC800] hover:bg-transparent">Teach on LearnCore</a>
           </li>
         </ul>
       </div>
