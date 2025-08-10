@@ -45,7 +45,13 @@ const Stats = () => {
           duration={3}
           onEnd={() => console.log("Ended! 👏")}
           onStart={() => console.log("Started! 💨")}
-        />
+        >
+          {({ countUpRef }) => (
+            <div>
+              <span className="stat-value" ref={countUpRef} />
+            </div>
+          )}
+        </CountUp>
       </div>
 
       <div className="stat">
@@ -66,7 +72,7 @@ const Stats = () => {
         </div>
         <div className="stat-title text-2xl text-white">Total Users</div>
         <CountUp
-          className="account-balance stat-value"
+          className="account-balance"
           start={0}
           end={Count?.totalUser}
           decimal=","
@@ -74,7 +80,13 @@ const Stats = () => {
           enableScrollSpy
           onEnd={() => console.log("Ended! 👏")}
           onStart={() => console.log("Started! 💨")}
-        />
+        >
+          {({ countUpRef }) => (
+            <div>
+              <span className="stat-value" ref={countUpRef} />
+            </div>
+          )}
+        </CountUp>
       </div>
 
       <div className="stat">
@@ -102,7 +114,13 @@ const Stats = () => {
           duration={3}
           onEnd={() => console.log("Ended! 👏")}
           onStart={() => console.log("Started! 💨")}
-        />
+        >
+          {({ countUpRef }) => (
+            <div>
+              <span className="stat-value" ref={countUpRef} />
+            </div>
+          )}
+        </CountUp>
       </div>
     </div>
   );
