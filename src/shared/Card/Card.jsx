@@ -1,7 +1,7 @@
 
 const Card = ({data}) => {
   return (
-    <div className="card w-[335px] rounded-none bg-gray-300">
+    <div className="card w-[335px] rounded-none bg-gray-100">
       <figure>
         <img
           src={data.imageUrl}
@@ -15,7 +15,7 @@ const Card = ({data}) => {
           {data.description}
         </p>
         <div className="card-actions justify-end">
-          <button className="btn bg-[#FDC800] text-white border-0">Enroll Now</button>
+          <button className="btn bg-[#FDC800] border-0">Enroll Now</button>
         </div>
       </div>
     </div>

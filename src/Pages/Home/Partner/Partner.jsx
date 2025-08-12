@@ -21,7 +21,7 @@ const Partner = () => {
     <>
       {/* partner section */}
       <div className="text-center mt-12">
-        <h1 className="mb-16 text-8xl font-bold text-gray-700">Our Partners</h1>
+        <h1 className="mb-16 text-8xl font-bold">Our Partners</h1>
         <Marquee>
           {partners.map((partner) => (
             <img className="w-[80px] ml-6" src={partner} alt="" />
