@@ -42,7 +42,7 @@ const Feedback = () => {
                 />
                 <p className="py-6 text-2xl font-bold">{f.name}</p>
                 {/* rating */}
-                <StarRating isReadOnly={true} initialRating={f.rating} />
+                <StarRating dimension={10} isReadOnly={true} initialRating={f.rating} />
                 <div>
                   <h1 className="text-5xl font-bold">{f.title}</h1>
                   <p className="py-6">{f.feedbackText}</p>

@@ -1,4 +1,5 @@
-import Banner from '../Home/Banner/Banner';
+import Instructor from '../../components/InstructorCard/Instructor';
+import Banner from './Banner/Banner';
 import Classes from './Classes/Classes';
 import Feedback from './Feedback/Feedback';
 import Partner from './Partner/Partner';
@@ -12,6 +13,7 @@ const Home = () => {
       <Classes/>
       <Feedback/>
       <Stats/>
+      <Instructor/>
     </div>
   );
 };
