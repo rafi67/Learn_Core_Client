@@ -28,7 +28,7 @@ const Instructor = () => {
       >
         {instructorData.map((i) => (
           <SwiperSlide>
-            <div className="card bg-base-100 w-[500px] shadow-2xl flex flex-row items-start mx-auto">
+            <div className="card bg-gray-100 w-[500px] flex flex-row items-start mx-auto">
               <figure>
                 <img
                   className="rounded-full w-[130px] h-[130px]"
