@@ -33,19 +33,19 @@ const Feedback = () => {
         className="mySwiper max-w-screen-lg"
       >
         {feedback.map((f) => (
-          <SwiperSlide key={f._id}>
-            <div className="hero bg-base-200 max-h[500px]">
-              <div className="hero-content flex-col items-start">
+          <SwiperSlide style={{ height: "500px" }} key={f._id}>
+            <div className="hero bg-base-200 max-w-[60%] h-[55%] m-auto relative top-30">
+              <div className="hero-content">
                 <img
                   src={f.photoUrl}
-                  className="max-w-sm rounded-lg shadow-2xl"
+                  className="max-w-sm rounded-full shadow-2xl border-8 border-white relative left-50 -top-30"
                 />
-                <p className="py-6 text-2xl font-bold">{f.name}</p>
                 {/* rating */}
-                <StarRating dimension={10} isReadOnly={true} initialRating={f.rating} />
-                <div>
-                  <h1 className="text-5xl font-bold">{f.title}</h1>
-                  <p className="py-6">{f.feedbackText}</p>
+                {/* <StarRating dimension={5} isReadOnly={true} initialRating={f.rating} /> */}
+                <div className="top-15 -left-21 relative text-center">
+                  <p className="text-md font-bold">{f.name}</p>
+                  <h1 className="text-lg font-bold">{f.title}</h1>
+                  <p className="text-md text-justify">{f.feedbackText}</p>
                 </div>
               </div>
             </div>
