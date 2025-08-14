@@ -1,4 +1,5 @@
 import Banner from './Banner/Banner';
+import BecomeAnInstructor from './BecomeAnInstructor/BecomeAnInstructor';
 import Classes from './Classes/Classes';
 import Feedback from './Feedback/Feedback';
 import Partner from './Partner/Partner';
@@ -13,6 +14,7 @@ const Home = () => {
       <Classes/>
       <Feedback/>
       <Stats/>
+      <BecomeAnInstructor/>
       <SkilledInstructor/>
     </div>
   );
