@@ -1,5 +1,6 @@
 import Banner from './Banner/Banner';
 import BecomeAnInstructor from './BecomeAnInstructor/BecomeAnInstructor';
+import CampusVideo from './CampusVideo/CampusVideo';
 import Classes from './Classes/Classes';
 import Feedback from './Feedback/Feedback';
 import Partner from './Partner/Partner';
@@ -15,6 +16,7 @@ const Home = () => {
       <Feedback/>
       <Stats/>
       <BecomeAnInstructor/>
+      <CampusVideo/>
       <SkilledInstructor/>
     </div>
   );
