@@ -15,7 +15,7 @@ const BecomeAnInstructor = () => {
               role that blends teaching, mentorship, and leadership to create
               lasting impact.
             </p>
-            <button className="btn bg-[#FDC800]">Get Started</button>
+            <button className="btn bg-[#FDC800]">Start teaching today</button>
           </div>
         </div>
       </div>
