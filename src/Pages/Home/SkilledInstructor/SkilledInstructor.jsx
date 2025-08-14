@@ -15,7 +15,7 @@ const SkilledInstructor = () => {
   });
 
   return (
-    <div className="mt-20">
+    <div className="mt-20 mb-20">
       <h1 className="text-4xl font-bold text-center">Our Skilled Instructor</h1>
       {/* card section */}
       <Swiper
