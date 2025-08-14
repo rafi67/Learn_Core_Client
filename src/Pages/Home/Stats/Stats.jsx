@@ -20,27 +20,6 @@ const Stats = () => {
 
   return (
     <div className="flex flex-col lg:flex-row space-y-4 space-x-4 mt-20 justify-center">
-      {/* total classes */}
-      <div className="card w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
-        <div className="card-body">
-          <h2 className="card-title">Total Classes</h2>
-          <CountUp
-            className="account-balance stat-value"
-            start={0}
-            end={Count?.totalClass}
-            enableScrollSpy
-            duration={3}
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
-          >
-            {({ countUpRef }) => (
-              <div>
-                <span className="stat-value" ref={countUpRef} />
-              </div>
-            )}
-          </CountUp>
-        </div>
-      </div>
       {/* total users */}
       <div className="card bg-base-100 w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
         <div className="card-body">
@@ -52,6 +31,28 @@ const Stats = () => {
             decimal=","
             duration={3}
             enableScrollSpy
+            onEnd={() => console.log("Ended! 👏")}
+            onStart={() => console.log("Started! 💨")}
+          >
+            {({ countUpRef }) => (
+              <div>
+                <span className="stat-value" ref={countUpRef} />
+              </div>
+            )}
+          </CountUp>
+        </div>
+      </div>
+
+      {/* total classes */}
+      <div className="card w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
+        <div className="card-body">
+          <h2 className="card-title">Total Classes</h2>
+          <CountUp
+            className="account-balance stat-value"
+            start={0}
+            end={Count?.totalClass}
+            enableScrollSpy
+            duration={3}
             onEnd={() => console.log("Ended! 👏")}
             onStart={() => console.log("Started! 💨")}
           >
