@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
 
-const Instructor = () => {
+const SkilledInstructor = () => {
   const { get } = useAxiosPublic();
 
   const { data: instructorData = [] } = useQuery({
@@ -15,7 +15,8 @@ const Instructor = () => {
   });
 
   return (
-    <div>
+    <div className="mt-20">
+      <h1 className="text-4xl font-bold text-center">Our Skilled Instructor</h1>
       {/* card section */}
       <Swiper
         autoplay={true}
@@ -24,7 +25,7 @@ const Instructor = () => {
         style={{
           "--swiper-pagination-color": "#FDC800",
         }}
-        className="mySwiper mt-20"
+        className="mySwiper mt-10"
       >
         {instructorData.map((i) => (
           <SwiperSlide>
@@ -45,18 +46,8 @@ const Instructor = () => {
           </SwiperSlide>
         ))}
       </Swiper>
-
-      {/* button */}
-      <div className="justify-self-center mt-20">
-        <button
-          type="submit"
-          className="btn rounded-4xl bg-transparent border-[#002147] text-[#002147] hover:bg-[#002147] hover:text-white"
-        >
-          Become an Instructor
-        </button>
-      </div>
     </div>
   );
 };
 
-export default Instructor;
+export default SkilledInstructor;
