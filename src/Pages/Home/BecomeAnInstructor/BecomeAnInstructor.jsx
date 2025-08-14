@@ -4,7 +4,7 @@ const BecomeAnInstructor = () => {
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <img
-            src="https://cdn.shortpixel.ai/spai/q_lossy+w_872+to_webp+ret_img/cosstraining.org/wp-content/uploads/2023/11/COSS-instructor-01.png"
+            src="https://i.ibb.co.com/XxGGht9B/COSS-instructor-01.webp"
             className="w-[400px] rounded-lg shadow-2xl"
           />
           <div className="w-[40%]">
