@@ -1,7 +1,7 @@
 
 const Card = ({data}) => {
   return (
-    <div className="card w-[335px] rounded-none bg-gray-100">
+    <div className="card w-screen mx-auto md:w-[98%] lg:w-[335px] rounded-none bg-gray-100">
       <figure>
         <img
           src={data.imageUrl}

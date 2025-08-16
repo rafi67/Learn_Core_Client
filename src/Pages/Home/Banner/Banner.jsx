@@ -12,7 +12,7 @@ const Banner = () => {
       image: "https://i.ibb.co.com/vtJqPPQ/c.jpg",
     },
     {
-      title: "Learn Mobile App Development",
+      title: "Learn App Development",
       image: "https://i.ibb.co.com/RpsVhFbf/mobile-App.jpg",
     },
     {
@@ -23,10 +23,14 @@ const Banner = () => {
 
   return (
     <div>
-      {/* carousel */}
-      <Carousel autoPlay={true} infiniteLoop={true} useKeyboardArrows={true} emulateTouch={true}>
+      <Carousel
+        autoPlay={true}
+        infiniteLoop={true}
+        useKeyboardArrows={true}
+        emulateTouch={true}
+      >
         {images.map((image) => (
-          <div className="h-[570px]">
+          <div>
             <img src={image.image} alt="" />
             <p className="legend">{image.title}</p>
           </div>

@@ -2,10 +2,11 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import Card from "../../../shared/Card/Card";
+import Card from "./Card/Card";
 import "swiper/css/pagination";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 
 const Classes = () => {
   const { get } = useAxiosPublic();
@@ -16,8 +17,27 @@ const Classes = () => {
     refetchOnWindowFocus: false,
   });
 
+  const [slidesPerView, setSlidesPerView] = useState(3);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      if (width >= 1024) {
+        setSlidesPerView(3);
+      } else if (width >= 768) {
+        setSlidesPerView(2);
+      } else {
+        setSlidesPerView(1);
+      }
+    };
+    handleResize(); // call the function once on mount
+    window.addEventListener("resize", handleResize); // listen for resize events
+
+    return () => window.removeEventListener("resize", handleResize); // remove the event listener on unmount
+  }, []);
+
   return (
-    <div className="mt-10 space-y-7">
+    <div className="w-screen lg:max-w-screen-lg mt-10 space-y-7 mx-auto">
       {/* text section */}
       <h1 className="text-4xl font-bold">Popular Courses</h1>
       {/* card section */}
@@ -32,13 +52,14 @@ const Classes = () => {
           "--swiper-navigation-color": "#FDC800",
           "--swiper-pagination-color": "#FDC800",
         }}
-        slidesPerView={3}
+        slidesPerView={slidesPerView}
         loop={true}
-        className="mySwiper max-w-screen-lg"
+        centeredSlides={true}
+        className="mySwiper"
       >
         {Class.map((data) => (
-          <SwiperSlide>
-            <Card key={data._id} data={data} />
+          <SwiperSlide key={data._id}>
+            <Card data={data} />
           </SwiperSlide>
         ))}
       </Swiper>

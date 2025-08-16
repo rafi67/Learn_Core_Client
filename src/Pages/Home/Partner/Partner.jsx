@@ -21,10 +21,10 @@ const Partner = () => {
     <>
       {/* partner section */}
       <div className="text-center mt-12">
-        <h1 className="mb-16 text-5xl font-bold">Our Partners</h1>
+        <h1 className="mb-6 md:mb-10 xl:mb-16 text-xl lg:text-5xl font-bold">Our Partners</h1>
         <Marquee>
           {partners.map((partner) => (
-            <img className="w-[80px] ml-6" src={partner} alt="" />
+            <img className="w-[40px] md:w-[50px] xl:w-[80px] ml-2 md:ml-3 xl:ml-6" src={partner} alt="" />
           ))}
         </Marquee>
       </div>

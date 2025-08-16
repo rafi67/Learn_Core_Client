@@ -29,7 +29,7 @@ const SkilledInstructor = () => {
       >
         {instructorData.map((i) => (
           <SwiperSlide>
-            <div className="card bg-gray-100 w-[500px] flex flex-row items-start mx-auto">
+            <div className="card bg-gray-100 w-[80%] xl:w-[500px] flex flex-col lg:flex-row items-center lg:items-start mx-auto">
               <figure>
                 <img
                   className="rounded-full w-[130px] h-[130px]"
@@ -37,7 +37,7 @@ const SkilledInstructor = () => {
                   alt="Shoes"
                 />
               </figure>
-              <div className="card-body w-[70%]">
+              <div className="card-body lg:w-[70%]">
                 <h2 className="card-title">{i.name}</h2>
                 <h2 className="card-title">{i.title}</h2>
                 <p className="text-justify">{i.experience}</p>

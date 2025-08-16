@@ -101,7 +101,7 @@ const Navbar = () => {
             </ul>
           </div>
         ) : (
-          <a className="btn">Sign In</a>
+          <a className="btn hidden lg:flex">Sign In</a>
         )}
       </div>
     </div>

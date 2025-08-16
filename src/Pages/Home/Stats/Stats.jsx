@@ -21,7 +21,7 @@ const Stats = () => {
   return (
     <div className="flex flex-col lg:flex-row space-y-4 space-x-4 mt-20 justify-center">
       {/* total users */}
-      <div className="card w-[100%] lg:w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
+      <div className="card w-[100%] lg:w-72 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
         <div className="card-body">
           <h2 className="card-title">Total Users</h2>
           <CountUp
@@ -44,7 +44,7 @@ const Stats = () => {
       </div>
 
       {/* total classes */}
-      <div className="card w-[100%] lg:w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
+      <div className="card w-[100%] lg:w-72 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
         <div className="card-body">
           <h2 className="card-title">Total Classes</h2>
           <CountUp
@@ -66,7 +66,7 @@ const Stats = () => {
       </div>
 
       {/* total enrollments */}
-      <div className="card w-[100%] lg:w-96 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
+      <div className="card w-[100%] lg:w-72 shadow-sm h-[200px] bg-linear-to-bl from-[#FDF3F0] to-[#EDFEFE]">
         <div className="card-body">
           <h2 className="card-title">Total Enrollments</h2>
           <CountUp
