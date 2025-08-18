@@ -10,7 +10,7 @@ const ClassCard = ({ data }) => {
         <p className="line-clamp-2">{data.description}</p>
         <div className="divider"></div>
         <p><span className="font-semibold">Price:</span> {data.price} BDT</p>
-        <p><span className="font-semibold">Total Enrollment:</span> {data.totalEnrollment} BDT</p>
+        <p><span className="font-semibold">Total Enrollment:</span> {data.totalEnrollment}</p>
         <div className="card-actions justify-end">
           <button className="btn bg-[#FDC800] border-0">Enroll</button>
         </div>
