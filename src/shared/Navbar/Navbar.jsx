@@ -1,7 +1,8 @@
+import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 
 const Navbar = () => {
-  const {user} = useAuth();
+  const { user } = useAuth();
   return (
     <div className="navbar bg-base-100 shadow-sm">
       <div className="navbar-start">
@@ -46,25 +47,34 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl hidden lg:flex">
+        <Link to="/" className="btn btn-ghost text-xl hidden lg:flex">
           <img
             className="w-[40px]"
             src="https://img.icons8.com/?size=100&id=uQOVVJtLx7J8&format=png&color=000000"
             alt=""
           />
           LearnCore
-        </a>
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <a className="hover:text-[#FDC800] hover:bg-transparent">Home</a>
+            <Link to="/" className="hover:text-[#FDC800] hover:bg-transparent">
+              Home
+            </Link>
           </li>
           <li>
-            <a className="hover:text-[#FDC800] hover:bg-transparent">All Classes</a>
+            <Link
+              to="/class"
+              className="hover:text-[#FDC800] hover:bg-transparent"
+            >
+              All Classes
+            </Link>
           </li>
           <li>
-            <a className="hover:text-[#FDC800] hover:bg-transparent">Teach on LearnCore</a>
+            <a className="hover:text-[#FDC800] hover:bg-transparent">
+              Teach on LearnCore
+            </a>
           </li>
         </ul>
       </div>
@@ -88,9 +98,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">
-                  Username
-                </a>
+                <a className="justify-between">Username</a>
               </li>
               <li>
                 <a>Dashboard</a>
