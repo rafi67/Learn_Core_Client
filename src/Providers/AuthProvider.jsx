@@ -7,9 +7,9 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
+import { GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
-import AuthContext from "../context/authContext";
+import AuthContext from "../context/AuthContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
@@ -61,7 +61,6 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     setLoading,
-    setUser,
     signInUser,
     signInWithGoogle,
     updateUserProfile,
