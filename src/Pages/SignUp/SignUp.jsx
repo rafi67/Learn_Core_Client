@@ -74,9 +74,8 @@ const SignUp = () => {
         <div className="text-center lg:text-left">
           <h1 className="text-5xl font-bold">Sign Up now!</h1>
           <p className="py-6">
-            Unlock your potential with Learn Core and start mastering new
-            skills today. Sign up now to begin your journey toward growth and
-            success!
+            Unlock your potential with Learn Core and start mastering new skills
+            today. Sign up now to begin your journey toward growth and success!
           </p>
         </div>
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -106,7 +105,7 @@ const SignUp = () => {
                 type="email"
                 className="input"
                 placeholder="Email"
-                {...register("email")}
+                {...register("email", { required: true })}
               />
               {errors.email?.type === "required" && (
                 <p className="text-lg text-red-500">email required</p>
@@ -128,18 +127,23 @@ const SignUp = () => {
                   minLength: 8,
                   maxLength: 20,
                   pattern:
-                    /^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
+                    /^^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
                 })}
               />
               {errors.password?.type === "pattern" && (
                 <p className="text-lg text-red-500">
-                  Password Minimum Length is 8
+                  Password must have one lower case, one number and one special
+                  character and minimum 8 character length
                 </p>
               )}
               {errors.password?.type === "minLength" && (
                 <p className="text-lg text-red-500">
-                  Password must have one lower case, one number and one special
-                  characterr
+                  Password Minimum Length is 8
+                </p>
+              )}
+              {errors.password?.type === "maxLength" && (
+                <p className="text-lg text-red-500">
+                  Password Minimum Length is 20
                 </p>
               )}
               {errors.password?.type === "required" && (
