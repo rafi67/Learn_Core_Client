@@ -1,15 +1,22 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
+// import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ClassCard from "./ClassCard/ClassCard";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Class = () => {
-  const { get } = useAxiosPublic();
+  // const { get } = useAxiosPublic();
+  const { get } = useAxiosSecure();
 
-  const { data: Classes = [] } = useQuery({
+  const { data: Classes = [], error } = useQuery({
     queryKey: ["class"],
-    queryFn: async () => await get("/allClasses").then((res) => res.data),
+    queryFn: async () =>
+      await get("/allClasses")
+        .then((res) => res.data)
+        .catch((err) => console.log(err)),
     refetchOnWindowFocus: false,
   });
+
+  if(error) return <p>Error</p>;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5">

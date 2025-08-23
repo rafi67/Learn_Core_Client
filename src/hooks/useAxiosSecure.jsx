@@ -2,15 +2,15 @@ import axios from "axios";
 import useAuth from "./useAuth";
 import { useNavigate } from "react-router";
 
-const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
-});
-
 const useAxiosSecure = () => {
   const { logOut } = useAuth();
   const navigate = useNavigate();
 
-  axios.interceptors.request.use(
+  const axiosSecure = axios.create({
+    baseURL: "http://localhost:5000",
+  });
+
+  axiosSecure.interceptors.request.use(
     (config) => {
       const token = localStorage.getItem("access-token");
       config.headers.authorization = `Bearer ${token}`;
@@ -22,7 +22,7 @@ const useAxiosSecure = () => {
   );
 
   //   interceptors 401 and 403 status
-  axios.interceptors.response.use(
+  axiosSecure.interceptors.response.use(
     (response) => {
       return response;
     },
