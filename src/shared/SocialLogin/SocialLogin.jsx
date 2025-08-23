@@ -1,24 +1,24 @@
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SocialLogin = () => {
   const { signInWithGoogle } = useContext(AuthContext);
-  const { post } = useAxiosPublic();
+  const { post } = useAxiosSecure();
   const navigate = useNavigate();
 
   const handleSubmit = () => {
     signInWithGoogle()
-      .then(async (result) => {
+      .then((result) => {
         console.log(result.user);
         const user = {
           name: result.user.displayName,
-          email: result.user.displayName,
+          email: result.user.email,
           photoUrl: result.user.photoURL,
         };
-        await post("/user", user);
+        post("/user", user);
         Swal.fire({
           position: "top-end",
           icon: "success",

@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
 
 const SignIn = () => {
@@ -33,7 +33,7 @@ const SignIn = () => {
         Swal.fire({
           position: "top-end",
           icon: "success",
-          title: "Sign Up successful",
+          title: "Sign In successful",
           showConfirmButton: false,
           timer: 1500,
         });
@@ -115,6 +115,7 @@ const SignIn = () => {
                 <p className="text-lg text-red-500">password required</p>
               )}
               <button className="btn bg-[#FDC800] mt-4">Sign In</button>
+              <Link className="text-[14px]" to='/signUp'>Don't have an account, create new</Link>
               <div className="divider">OR</div>
               <SocialLogin />
             </form>

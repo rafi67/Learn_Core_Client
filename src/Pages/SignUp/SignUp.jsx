@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../hooks/useAxiosPublic";
 import axios from "axios";
 import Swal from "sweetalert2";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const SignUp = () => {
   const {
@@ -25,7 +25,7 @@ const SignUp = () => {
 
   const { createUser, updateUserProfile } = useAuth();
 
-  const { post } = useAxiosPublic();
+  const { post } = useAxiosSecure();
 
   const navigate = useNavigate();
 
@@ -150,6 +150,7 @@ const SignUp = () => {
                 <p className="text-lg text-red-500">password required</p>
               )}
               <button className="btn bg-[#FDC800] mt-4">Sign Up</button>
+              <Link className="text-[14px]" to='/signIn'>Already have an account</Link>
               <div className="divider">OR</div>
               <SocialLogin />
             </form>

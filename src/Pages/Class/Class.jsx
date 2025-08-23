@@ -1,11 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-// import useAxiosPublic from "../../hooks/useAxiosPublic";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ClassCard from "./ClassCard/ClassCard";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const Class = () => {
-  // const { get } = useAxiosPublic();
-  const { get } = useAxiosSecure();
+  const { get } = useAxiosPublic();
 
   const { data: Classes = [], error } = useQuery({
     queryKey: ["class"],
