@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
-import { Link, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 
 const SignIn = () => {
@@ -25,7 +25,9 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
-  const from = navigate.state?.from || "/";
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const submit = (data) => {
     signInUser(data.email, data.password)

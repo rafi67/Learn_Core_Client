@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const ClassCard = ({ data }) => {
   return (
     <div className="card w-screen mx-auto md:w-[98%] lg:w-[335px] rounded-none bg-gray-100">
@@ -12,7 +14,7 @@ const ClassCard = ({ data }) => {
         <p><span className="font-semibold">Price:</span> {data.price} BDT</p>
         <p><span className="font-semibold">Total Enrollment:</span> {data.totalEnrollment}</p>
         <div className="card-actions justify-end">
-          <button className="btn bg-[#FDC800] border-0">Enroll</button>
+          <Link to={`/classDetails/${data._id}`} className="btn bg-[#FDC800] border-0">Enroll</Link>
         </div>
       </div>
     </div>

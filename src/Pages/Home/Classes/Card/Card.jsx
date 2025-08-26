@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 
 const Card = ({data}) => {
   return (
@@ -15,7 +16,7 @@ const Card = ({data}) => {
           {data.description}
         </p>
         <div className="card-actions justify-end">
-          <button className="btn bg-[#FDC800] border-0">Enroll Now</button>
+          <Link to={`/classDetails/${data._id}`} className="btn bg-[#FDC800] border-0">Enroll Now</Link>
         </div>
       </div>
     </div>
