@@ -24,8 +24,8 @@ const ClassDetails = () => {
   if (isLoading) return <Loading />;
 
   return (
-    <div className="w-full my-20 flex items-start justify-center space-x-10">
-      <div className="hero bg-base-200 w-[50%]">
+    <div className="w-full my-20 flex flex-col lg:flex-row items-start justify-center space-y-4 lg:space-y-0 lg:space-x-10">
+      <div className="hero bg-base-200 w-full lg:w-[50%]">
         <div className="hero-content flex-col lg:flex-col">
           <img src={classDetails[0].imageUrl} className="w-[96%]" />
           {/* tab section */}
@@ -52,20 +52,20 @@ const ClassDetails = () => {
                 <div className="flex items-center space-x-1">
                   <img className="w-[30px] h-[30px]" src={right} alt="" />
                   <p>
-                    <span className="font-bold">Students:</span>{" "}
+                    <span className="font-bold text-sm lg:text-lg">Students:</span>{" "}
                     {classDetails[0].totalEnrollment}
                   </p>
                 </div>
                 <div className="flex items-center space-x-1">
                   <img className="w-[30px] h-[30px]" src={right} alt="" />
                   <p>
-                    <span className="font-bold">Instructor:</span>{" "}
+                    <span className="font-bold text-sm lg:text-lg">Instructor:</span>{" "}
                     {classDetails[0].name}
                   </p>
                 </div>
               </div>
-              <h1 className="text-xl font-bold">{classDetails[0].title}</h1>
-              <p className="py-6">{classDetails[0].description}</p>
+              <h1 className="text-md lg:text-xl font-bold">{classDetails[0].title}</h1>
+              <p className="text-md text-justify lg:text-lg py-6">{classDetails[0].description}</p>
             </div>
           ) : (
             <div>
@@ -88,7 +88,7 @@ const ClassDetails = () => {
         </div>
       </div>
       {/* pay section */}
-      <div className="hero bg-base-200 w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4">
+      <div className="hero bg-base-200 w-full lg:w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4">
         <div role="tablist" className="tabs tabs-border">
           <a
             role="tab"
