@@ -6,6 +6,8 @@ import SignIn from "../Pages/SignIn/SignIn";
 import SignUp from "../Pages/SignUp/SignUp";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
+import StudentRoute from "./StudentRoute";
+import Dashboard from "../Layout/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -39,12 +41,18 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/helloWorld",
+    path: "/studentDashboard",
     element: (
-      <PrivateRoute>
-        <p>Hello World page</p>
-      </PrivateRoute>
+      <StudentRoute>
+        <Dashboard/>
+      </StudentRoute>
     ),
+    children: [
+      {
+        path: 'enrollList',
+        element: <p>Enroll List Page</p>
+      }
+    ],
   },
 ]);
 
