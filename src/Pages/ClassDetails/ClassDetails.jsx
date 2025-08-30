@@ -4,6 +4,11 @@ import { useParams } from "react-router";
 import Loading from "../../shared/Loading/Loading";
 import right from "../../assets/right.png";
 import { useState } from "react";
+import { loadStripe } from "@stripe/stripe-js";
+import CheckoutForm from "./Payment/CheckoutForm";
+import { Elements } from "@stripe/react-stripe-js";
+
+const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
 const ClassDetails = () => {
   const { get } = useAxiosSecure();
@@ -18,8 +23,6 @@ const ClassDetails = () => {
       await get(`/classDetails/${id}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
-
-  console.log(classDetails);
 
   if (isLoading) return <Loading />;
 
@@ -52,20 +55,28 @@ const ClassDetails = () => {
                 <div className="flex items-center space-x-1">
                   <img className="w-[30px] h-[30px]" src={right} alt="" />
                   <p>
-                    <span className="font-bold text-sm lg:text-lg">Students:</span>{" "}
+                    <span className="font-bold text-sm lg:text-lg">
+                      Students:
+                    </span>{" "}
                     {classDetails[0].totalEnrollment}
                   </p>
                 </div>
                 <div className="flex items-center space-x-1">
                   <img className="w-[30px] h-[30px]" src={right} alt="" />
                   <p>
-                    <span className="font-bold text-sm lg:text-lg">Instructor:</span>{" "}
+                    <span className="font-bold text-sm lg:text-lg">
+                      Instructor:
+                    </span>{" "}
                     {classDetails[0].name}
                   </p>
                 </div>
               </div>
-              <h1 className="text-md lg:text-xl font-bold">{classDetails[0].title}</h1>
-              <p className="text-md text-justify lg:text-lg py-6">{classDetails[0].description}</p>
+              <h1 className="text-md lg:text-xl font-bold">
+                {classDetails[0].title}
+              </h1>
+              <p className="text-md text-justify lg:text-lg py-6">
+                {classDetails[0].description}
+              </p>
             </div>
           ) : (
             <div>
@@ -98,8 +109,21 @@ const ClassDetails = () => {
           </a>
         </div>
         <p className="text-2xl font-semibold">{classDetails[0].price} BDT</p>
-        <button className="btn bg-[#FDC800] w-full text-lg">Pay</button>
+        <button
+          className="btn bg-[#FDC800] w-full text-lg"
+          onClick={() => document.getElementById("my_modal_5").showModal()}
+        >
+          Pay
+        </button>
       </div>
+      {/* Open the modal using document.getElementById('ID').showModal() method */}
+      <dialog id="my_modal_2" className="modal">
+        <div className="modal-box">
+          <Elements stripe={stripePromise}>
+            <CheckoutForm id={id} price={classDetails[0].price}/>
+          </Elements>
+        </div>
+      </dialog>
     </div>
   );
 };

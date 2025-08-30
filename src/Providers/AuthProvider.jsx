@@ -9,8 +9,8 @@ import {
 import { useEffect, useState } from "react";
 import { GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../firebase/firebase.config";
-import AuthContext from "../context/AuthContext";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import AuthContext from "../context/authContext";
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
