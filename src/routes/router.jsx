@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "classDetails/:id",
+        path: "classDetails",
         element: (
           <PrivateRoute>
             <ClassDetails />

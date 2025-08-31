@@ -15,6 +15,7 @@ import AuthContext from "../context/authContext";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [classId, setClassId] = useState(null);
 
   const { post } = useAxiosPublic();
 
@@ -75,6 +76,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     user,
     loading,
+    classId,
+    setClassId,
     setLoading,
     signInUser,
     signInWithGoogle,

@@ -78,17 +78,15 @@ const CheckoutForm = ({ price, id }) => {
         transactionId: paymentIntent.id,
         classId: id,
       };
-      const res = await axiosSecure.post('/payments', payment);
-      console.log('payment response:', res.data);
-      console.log("payment", payment);
-      console.log("payment intent", paymentIntent);
+      const res = await axiosSecure.post("/payments", payment);
+      console.log(res.data);
       document.getElementById("my_modal_5").close();
       Swal.fire({
         title: "Payment Successful",
         icon: "success",
         draggable: true,
       });
-      navigate('/studentDashBoard/myEnrollClass');
+      navigate("/studentDashBoard/myEnrollClass");
     }
   };
 

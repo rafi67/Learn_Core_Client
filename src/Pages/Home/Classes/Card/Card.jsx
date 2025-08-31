@@ -1,6 +1,16 @@
-import { Link } from "react-router";
+import { useNavigate } from "react-router";
+import useAuth from "../../../../hooks/useAuth";
 
 const Card = ({data}) => {
+
+  const { setClassId } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSubmit = () => {
+    setClassId(data._id);
+    navigate('/classDetails');
+  };
+
   return (
     <div className="card w-screen mx-auto md:w-[98%] lg:w-[335px] rounded-none bg-gray-100">
       <figure>
@@ -16,7 +26,7 @@ const Card = ({data}) => {
           {data.description}
         </p>
         <div className="card-actions justify-end">
-          <Link to={`/classDetails/${data._id}`} className="btn bg-[#FDC800] border-0">Enroll Now</Link>
+          <button onClick={handleSubmit} className="btn bg-[#FDC800] border-0">Enroll Now</button>
         </div>
       </div>
     </div>
