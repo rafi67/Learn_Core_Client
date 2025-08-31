@@ -12,7 +12,7 @@ import useAuth from "../../hooks/useAuth";
 const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
 const ClassDetails = () => {
-  const { get, post } = useAxiosSecure();
+  const { get } = useAxiosSecure();
 
   const { id } = useParams();
   const { user } = useAuth();
@@ -21,7 +21,7 @@ const ClassDetails = () => {
   const { data: paid = false } = useQuery({
     queryKey: ["paid"],
     queryFn: async () =>
-      await post("/verifyPayment", {
+      await get(`/verifyPayment/?email=${user.email}&classId=${id}`, {
         email: user.email,
         classId: id,
       }).then((res) => {

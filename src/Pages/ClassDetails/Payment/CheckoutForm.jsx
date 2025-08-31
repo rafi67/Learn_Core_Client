@@ -4,6 +4,7 @@ import useAxiosSecure from "../../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router";
 
 const CheckoutForm = ({ price, id }) => {
   const stripe = useStripe();
@@ -11,6 +12,7 @@ const CheckoutForm = ({ price, id }) => {
   const [error, setError] = useState("");
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const { data: clientSecret = "" } = useQuery({
     queryKey: ["clientSecret"],
@@ -86,6 +88,7 @@ const CheckoutForm = ({ price, id }) => {
         icon: "success",
         draggable: true,
       });
+      navigate('studentDashBoard/myEnrollClass');
     }
   };
 
