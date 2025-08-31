@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import StudentRoute from "./StudentRoute";
 import Dashboard from "../Layout/Dashboard";
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
+import MyEnrollClasses from "../Pages/MyEnrollClasses/MyEnrollClasses";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: 'myEnrollClass',
-        element: <p>Enroll List Page</p>
+        element: <MyEnrollClasses/>
       }
     ],
   },
