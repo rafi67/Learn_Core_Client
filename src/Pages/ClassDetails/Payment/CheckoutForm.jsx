@@ -88,7 +88,7 @@ const CheckoutForm = ({ price, id }) => {
         icon: "success",
         draggable: true,
       });
-      navigate('studentDashBoard/myEnrollClass');
+      navigate('/studentDashBoard/myEnrollClass');
     }
   };
 
