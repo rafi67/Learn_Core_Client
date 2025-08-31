@@ -8,11 +8,13 @@ import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
 import StudentRoute from "./StudentRoute";
 import Dashboard from "../Layout/Dashboard";
+import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <PageNotFound/>,
     children: [
       {
         path: "",
@@ -49,7 +51,7 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'enrollList',
+        path: 'myEnrollClass',
         element: <p>Enroll List Page</p>
       }
     ],

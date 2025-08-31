@@ -138,7 +138,7 @@ const ClassDetails = () => {
             </button>
           </>
         ) : (
-          <Link to="/studentDashboard/enrollList" className="btn bg-[#FDC800] w-full text-lg">
+          <Link to="/studentDashboard/myEnrollClass" className="btn bg-[#FDC800] w-full text-lg">
             Class Details
           </Link>
         )}

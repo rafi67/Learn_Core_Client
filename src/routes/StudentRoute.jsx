@@ -8,7 +8,7 @@ const StudentRoute = ({ children }) => {
   const {user} = useAuth();
   const location = useLocation();
 
-  if(isLoading) return <Loading/>
+  if(isLoading) return <Loading/>;
 
   if (user && verifyUser[0].role === "student") return children;
 
