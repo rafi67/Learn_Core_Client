@@ -1,14 +1,16 @@
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
+import useVerifyUser from "../../hooks/useVerifyUser";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const { userType } = useVerifyUser();
 
   const handleLogOut = () => {
     logOut()
-    .then(result => console.log(result))
-    .catch(err => console.log(err));
-  }
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className="navbar bg-base-100 shadow-sm">
@@ -94,10 +96,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={user.photoURL}
-                />
+                <img alt="Tailwind CSS Navbar component" src={user.photoURL} />
               </div>
             </div>
             <ul
@@ -107,16 +106,20 @@ const Navbar = () => {
               <li>
                 <a className="justify-between">{user.displayName}</a>
               </li>
-              <li>
-                <a>Dashboard</a>
-              </li>
+              {userType?.role === "student" && (
+                <li>
+                  <Link to="/studentDashboard">My Dashboard</Link>
+                </li>
+              )}
               <li>
                 <a onClick={handleLogOut}>Logout</a>
               </li>
             </ul>
           </div>
         ) : (
-          <Link to='/signIn' className="btn hidden lg:flex">Sign In</Link>
+          <Link to="/signIn" className="btn hidden lg:flex">
+            Sign In
+          </Link>
         )}
       </div>
     </div>

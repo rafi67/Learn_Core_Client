@@ -13,9 +13,9 @@ const useVerifyUser = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log('verify user =', verifyUser);
+  const userType = verifyUser[0];
 
-  return { verifyUser, isLoading };
+  return { userType, isLoading };
 };
 
 export default useVerifyUser;

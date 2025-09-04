@@ -5,12 +5,11 @@ import { MdEditDocument } from "react-icons/md";
 import useVerifyUser from "../../hooks/useVerifyUser";
 import { CgProfile } from "react-icons/cg";
 
-
 const Sidebar = () => {
-  const { verifyUser} = useVerifyUser();
+  const { userType } = useVerifyUser();
 
   return (
-    <div className="w-64 min-h-screen bg-[#1A2131] text-white">
+    <div className="w-64 hidden lg:block min-h-screen bg-[#1A2131] text-white">
       <ul className="w-full menu p-4">
         {/* shared nav links */}
         <li>
@@ -25,7 +24,7 @@ const Sidebar = () => {
             All Classes
           </NavLink>
         </li>
-        {verifyUser[0].role === "student" && (
+        {userType?.role === "student" && (
           <li>
             <NavLink to="/studentDashboard/myEnrollClass">
               <MdEditDocument />
@@ -35,7 +34,7 @@ const Sidebar = () => {
         )}
         <li>
           <NavLink>
-            <CgProfile/>
+            <CgProfile />
             Profile
           </NavLink>
         </li>

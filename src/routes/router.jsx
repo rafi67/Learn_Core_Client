@@ -10,6 +10,7 @@ import StudentRoute from "./StudentRoute";
 import Dashboard from "../Layout/Dashboard";
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 import MyEnrollClasses from "../Pages/MyEnrollClasses/MyEnrollClasses";
+import MyEnrollClassDetails from "../Pages/MyEnrollClassDetails/MyEnrollClassDetails";
 
 const router = createBrowserRouter([
   {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
         element: <SignUp />,
       },
       {
-        path: "classDetails",
+        path: "classDetails/:id",
         element: (
           <PrivateRoute>
             <ClassDetails />
@@ -54,6 +55,10 @@ const router = createBrowserRouter([
       {
         path: 'myEnrollClass',
         element: <MyEnrollClasses/>
+      },
+      {
+        path: 'enrollClassDetails/:id',
+        element: <MyEnrollClassDetails/>
       }
     ],
   },

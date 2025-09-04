@@ -38,7 +38,7 @@ const Feedback = () => {
               <div className="hero-content">
                 <img
                   src={f.photoUrl}
-                  className="w-[70%] xl:max-w-sm rounded-full shadow-2xl border-8 border-white relative mx-auto left-15 lg:left-50 -top-30"
+                  className="w-[200px] h-[200px] xl:max-w-sm rounded-full shadow-2xl border-8 border-white relative mx-auto left-15 lg:left-50 -top-30"
                 />
                 <div className="top-15 -left-21 relative text-center">
                   <p className="text-[12px] md:text-lg lg:text-xl font-bold">{f.name}</p>

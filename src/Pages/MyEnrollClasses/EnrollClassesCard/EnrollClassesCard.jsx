@@ -2,7 +2,7 @@ import { Link } from "react-router";
 
 const EnrollClassesCard = ({ data }) => {
   return (
-    <div className="card w-screen mx-auto md:w-[98%] lg:w-[335px] rounded-none bg-gray-100">
+    <div className="card w-screen mx-auto md:w-[98%] lg:w-full rounded-none bg-gray-100">
       <figure>
         <img src={data.imageUrl} alt="" className="w-full h-[320px]" />
       </figure>
@@ -11,6 +11,7 @@ const EnrollClassesCard = ({ data }) => {
         <h2 className="card-title line-clamp-1">{data.title}</h2>
         <div className="card-actions justify-end">
           <Link
+            to={`/studentDashboard/enrollClassDetails/${data._id}`}
             className="btn bg-[#FDC800] border-0"
           >
             Continue

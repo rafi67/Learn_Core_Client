@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { Link } from "react-router";
+import { Link, useParams } from "react-router";
 import Loading from "../../shared/Loading/Loading";
 import right from "../../assets/right.png";
 import { useState } from "react";
@@ -13,18 +13,14 @@ const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
 const ClassDetails = () => {
   const { get } = useAxiosSecure();
-
-  const { classId } = useAuth();
   const { user } = useAuth();
   const [selected, setSelected] = useState(1);
+  const {id} = useParams();
 
   const { data: paid = false } = useQuery({
     queryKey: ["paid"],
     queryFn: async () =>
-      await get(`/verifyPayment/?email=${user.email}&classId=${classId}`, {
-        email: user.email,
-        classId: classId,
-      }).then((res) => {
+      await get(`/verifyPayment/?email=${user.email}&classId=${id}`).then((res) => {
         console.log(res.data);
         return res.data.isPaid;
       }),
@@ -34,7 +30,7 @@ const ClassDetails = () => {
   const { data = [], isLoading } = useQuery({
     queryKey: ["classDetails"],
     queryFn: async () =>
-      await get(`/classDetails/${classId}`).then((res) => res.data),
+      await get(`/classDetails/${id}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
 
@@ -151,7 +147,7 @@ const ClassDetails = () => {
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <Elements stripe={stripePromise}>
-              <CheckoutForm id={classId} price={classDetails.price} />
+              <CheckoutForm id={id} price={classDetails.price} />
             </Elements>
           </div>
         </dialog>

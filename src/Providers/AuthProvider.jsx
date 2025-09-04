@@ -16,6 +16,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [classId, setClassId] = useState(null);
+  const [enrollClassId, setEnrollClassId] = useState(null);
 
   const { post } = useAxiosPublic();
 
@@ -77,7 +78,9 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     classId,
+    enrollClassId,
     setClassId,
+    setEnrollClassId,
     setLoading,
     signInUser,
     signInWithGoogle,
