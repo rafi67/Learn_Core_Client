@@ -12,12 +12,14 @@ import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 import MyEnrollClasses from "../Pages/MyEnrollClasses/MyEnrollClasses";
 import MyEnrollClassDetails from "../Pages/MyEnrollClassDetails/MyEnrollClassDetails";
 import Profile from "../Pages/Profile/Profile";
+import AdminRoute from "./AdminRoute";
+import TeacherRequest from "../Pages/TeacherRequest/TeacherRequest";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <PageNotFound/>,
+    errorElement: <PageNotFound />,
     children: [
       {
         path: "",
@@ -49,22 +51,40 @@ const router = createBrowserRouter([
     path: "studentDashboard",
     element: (
       <StudentRoute>
-        <Dashboard/>
+        <Dashboard />
       </StudentRoute>
     ),
     children: [
       {
-        path: 'myEnrollClass',
-        element: <MyEnrollClasses/>
+        path: "myEnrollClass",
+        element: <MyEnrollClasses />,
       },
       {
-        path: 'enrollClassDetails/:id',
-        element: <MyEnrollClassDetails/>
+        path: "enrollClassDetails/:id",
+        element: <MyEnrollClassDetails />,
       },
       {
-        path: 'studentProfile',
+        path: "studentProfile",
+        element: <Profile />,
+      },
+    ],
+  },
+  {
+    path: "adminDashBoard",
+    element: (
+      <AdminRoute>
+        <Dashboard />
+      </AdminRoute>
+    ),
+    children: [
+      {
+        path: 'adminProfile',
         element: <Profile/>
       },
+      {
+        path: 'teacherRequest',
+        element: <TeacherRequest/>
+      }
     ],
   },
 ]);

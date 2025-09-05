@@ -4,6 +4,7 @@ import { MdClass } from "react-icons/md";
 import { MdEditDocument } from "react-icons/md";
 import useVerifyUser from "../../hooks/useVerifyUser";
 import { CgProfile } from "react-icons/cg";
+import { IoMdGitPullRequest } from "react-icons/io";
 
 const Sidebar = () => {
   const { userType } = useVerifyUser();
@@ -29,6 +30,14 @@ const Sidebar = () => {
             <NavLink to="/studentDashboard/myEnrollClass">
               <MdEditDocument />
               My Enroll Class
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "admin" && (
+          <li>
+            <NavLink to="/adminDashboard/teacherRequest">
+              <IoMdGitPullRequest />
+              Teacher Request
             </NavLink>
           </li>
         )}
