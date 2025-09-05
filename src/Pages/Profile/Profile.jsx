@@ -1,8 +1,10 @@
 import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
+import useVerifyUser from "../../hooks/useVerifyUser";
 
 const Profile = () => {
   const { user } = useAuth();
+  const { userType } = useVerifyUser();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,6 +35,13 @@ const Profile = () => {
           className="input"
           placeholder="Name"
           value={user.email}
+        />
+        <legend className="fieldset-legend">Role</legend>
+        <input
+          type="text"
+          className="input"
+          placeholder="User Role"
+          value={userType?.role}
         />
         <button className="btn w-1/3">Save</button>
       </form>
