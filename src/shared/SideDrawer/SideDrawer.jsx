@@ -47,12 +47,22 @@ const SideDrawer = () => {
               </NavLink>
             </li>
           )}
-          <li>
-            <NavLink to="/studentDashBoard/studentProfile">
-              <CgProfile />
-              Profile
-            </NavLink>
-          </li>
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/studentDashboard/adminProfile">
+                <CgProfile />
+                Profile
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "student" && (
+            <li>
+              <NavLink to="/studentDashboard/studentProfile">
+                <CgProfile />
+                Profile
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>
