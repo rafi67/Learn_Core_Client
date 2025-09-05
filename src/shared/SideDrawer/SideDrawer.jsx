@@ -48,7 +48,7 @@ const SideDrawer = () => {
             </li>
           )}
           <li>
-            <NavLink>
+            <NavLink to="/studentDashBoard/studentProfile">
               <CgProfile />
               Profile
             </NavLink>

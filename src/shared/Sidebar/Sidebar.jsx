@@ -33,7 +33,7 @@ const Sidebar = () => {
           </li>
         )}
         <li>
-          <NavLink>
+          <NavLink to="/studentDashboard/studentProfile">
             <CgProfile />
             Profile
           </NavLink>

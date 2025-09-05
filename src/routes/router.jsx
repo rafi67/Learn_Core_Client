@@ -11,6 +11,7 @@ import Dashboard from "../Layout/Dashboard";
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 import MyEnrollClasses from "../Pages/MyEnrollClasses/MyEnrollClasses";
 import MyEnrollClassDetails from "../Pages/MyEnrollClassDetails/MyEnrollClassDetails";
+import Profile from "../Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,11 @@ const router = createBrowserRouter([
       {
         path: 'enrollClassDetails/:id',
         element: <MyEnrollClassDetails/>
-      }
+      },
+      {
+        path: 'studentProfile',
+        element: <Profile/>
+      },
     ],
   },
 ]);
