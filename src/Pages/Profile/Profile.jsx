@@ -17,7 +17,7 @@ const Profile = () => {
             <img src={user.photoURL} />
           </div>
         </div>
-        <button className="btn w-1/3">Update Profile Image</button>
+        <button className="btn lg:w-1/3">Update Profile Image</button>
       </form>
       <form className="fieldset space-y-4" onSubmit={handleSubmit}>
         <legend className="fieldset-legend">Name</legend>
