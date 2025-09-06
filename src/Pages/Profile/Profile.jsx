@@ -1,33 +1,26 @@
-import Swal from "sweetalert2";
 import useAuth from "../../hooks/useAuth";
 import useVerifyUser from "../../hooks/useVerifyUser";
-
 const Profile = () => {
   const { user } = useAuth();
   const { userType } = useVerifyUser();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    Swal.fire("Feature will be available soon!");
-  };
-
   return (
     <div className="p-4 w-[80%]">
-      <form className="fieldset space-y-4" onSubmit={handleSubmit}>
+      <fieldset className="fieldset space-y-4">
         <div className="avatar relative left-25">
           <div className="w-24 rounded-full">
             <img src={user.photoURL} />
           </div>
         </div>
-        <button className="btn lg:w-1/3">Update Profile Image</button>
-      </form>
-      <form className="fieldset space-y-4" onSubmit={handleSubmit}>
+      </fieldset>
+      <fieldset className="fieldset space-y-4">
         <legend className="fieldset-legend">Name</legend>
         <input
           type="text"
           className="input"
           placeholder="Name"
           value={user.displayName}
+          readOnly
         />
         <legend className="fieldset-legend">Email</legend>
         <input
@@ -35,6 +28,7 @@ const Profile = () => {
           className="input"
           placeholder="Name"
           value={user.email}
+          readOnly
         />
         <legend className="fieldset-legend">Role</legend>
         <input
@@ -42,9 +36,9 @@ const Profile = () => {
           className="input"
           placeholder="User Role"
           value={userType?.role}
+          readOnly
         />
-        <button className="btn w-1/3">Save</button>
-      </form>
+      </fieldset>
     </div>
   );
 };

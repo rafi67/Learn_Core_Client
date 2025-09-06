@@ -150,7 +150,9 @@ const SignUp = () => {
                 <p className="text-lg text-red-500">password required</p>
               )}
               <button className="btn bg-[#FDC800] mt-4">Sign Up</button>
-              <Link className="text-[14px]" to='/signIn'>Already have an account</Link>
+              <Link className="text-[14px]" to="/signIn">
+                Already have an account
+              </Link>
               <div className="divider">OR</div>
               <SocialLogin />
             </form>
