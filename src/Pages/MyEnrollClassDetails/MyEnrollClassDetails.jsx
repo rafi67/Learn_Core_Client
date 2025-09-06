@@ -32,11 +32,14 @@ const MyEnrollClassDetails = () => {
     refetchOnWindowFocus: false,
   });
 
-  // const {data: isSubmitted} = useQuery({
-  //   queryKey: ['submitted'],
-  //   queryFn: async () => await get(`/verifySubmission?email=${user.email}`),
-  //   refetchOnWindowFocus: false,
-  // });
+  const { data: isSubmitted = {} } = useQuery({
+    queryKey: ["submitted"],
+    queryFn: async () =>
+      await get(`/verifySubmission?email=${user.email}&classId=${id}`).then(
+        (res) => res.data
+      ),
+    refetchOnWindowFocus: false,
+  });
 
   const submitAssignment = async (id) => {
     const assignment = {
@@ -139,41 +142,35 @@ const MyEnrollClassDetails = () => {
             </thead>
             <tbody>
               {/* row */}
-              {assignments.map((data) => {
-                const res = get(`/verifySubmission?email=${user.email}&assignmentId=${data._id}`);
-                const isSubmitted = res.data;
-                return (
-                  <tr key={data._id}>
-                    <th>{++i}</th>
-                    <td className="text-sm md:text-md text-wrap">
-                      {data.title}
-                    </td>
-                    <td className="text-sm md:text-md text-wrap">
-                      {data.description}
-                    </td>
-                    <td className="lg:w-[10%]">{data.deadline}</td>
-                    <td>
-                      <input
-                        type="text"
-                        placeholder="Doc Url"
-                        className="input"
-                        name="docUrl"
-                        onChange={(e) => setDocUrl(e.target.value)}
-                        disabled={!isSubmitted}
-                      />
-                    </td>
-                    <td>
-                      <button
-                        className="btn text-sm"
-                        onClick={() => submitAssignment(data._id)}
-                        disabled={!isSubmitted}
-                      >
-                        Submit
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {assignments.map((data) => (
+                <tr key={data._id}>
+                  <th>{++i}</th>
+                  <td className="text-sm md:text-md text-wrap">{data.title}</td>
+                  <td className="text-sm md:text-md text-wrap">
+                    {data.description}
+                  </td>
+                  <td className="lg:w-[10%]">{data.deadline}</td>
+                  <td>
+                    <input
+                      type="text"
+                      placeholder="Doc Url"
+                      className="input"
+                      name="docUrl"
+                      onChange={(e) => setDocUrl(e.target.value)}
+                      disabled={!isSubmitted[data._id]}
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="btn text-sm"
+                      onClick={() => submitAssignment(data._id)}
+                      disabled={!isSubmitted[data._id]}
+                    >
+                      Submit
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         ) : (
