@@ -14,6 +14,7 @@ import MyEnrollClassDetails from "../Pages/MyEnrollClassDetails/MyEnrollClassDet
 import Profile from "../Pages/Profile/Profile";
 import AdminRoute from "./AdminRoute";
 import TeacherRequest from "../Pages/TeacherRequest/TeacherRequest";
+import TeachOnLearnCore from "../Pages/TeachOnLearnCore/TeachOnLearnCore";
 
 const router = createBrowserRouter([
   {
@@ -42,6 +43,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ClassDetails />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "teachOnLearnCore",
+        element: (
+          <PrivateRoute>
+            <TeachOnLearnCore />
           </PrivateRoute>
         ),
       },
@@ -78,13 +87,13 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: 'adminProfile',
-        element: <Profile/>
+        path: "adminProfile",
+        element: <Profile />,
       },
       {
-        path: 'teacherRequest',
-        element: <TeacherRequest/>
-      }
+        path: "teacherRequest",
+        element: <TeacherRequest />,
+      },
     ],
   },
 ]);

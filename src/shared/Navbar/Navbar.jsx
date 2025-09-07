@@ -81,9 +81,9 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <a className="hover:text-[#FDC800] hover:bg-transparent">
+            <Link to="/teachOnLearnCore" className="hover:text-[#FDC800] hover:bg-transparent">
               Teach on LearnCore
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
