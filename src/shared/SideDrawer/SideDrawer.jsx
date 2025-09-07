@@ -5,6 +5,8 @@ import { MdEditDocument } from "react-icons/md";
 import useVerifyUser from "../../hooks/useVerifyUser";
 import { CgProfile } from "react-icons/cg";
 import { MdOutlineMenu } from "react-icons/md";
+import { IoMdGitPullRequest } from "react-icons/io";
+import { FaUsers } from "react-icons/fa";
 
 const SideDrawer = () => {
   const { userType } = useVerifyUser();
@@ -47,17 +49,33 @@ const SideDrawer = () => {
               </NavLink>
             </li>
           )}
-          {userType?.role === "admin" && (
+          {userType?.role === "student" && (
             <li>
-              <NavLink to="/studentDashboard/adminProfile">
+              <NavLink to="/studentDashboard/studentProfile">
                 <CgProfile />
                 Profile
               </NavLink>
             </li>
           )}
-          {userType?.role === "student" && (
+          {userType?.role === "admin" && (
             <li>
-              <NavLink to="/studentDashboard/studentProfile">
+              <NavLink to="/adminDashboard/teacherRequest">
+                <IoMdGitPullRequest />
+                Teacher Request
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/adminDashboard/users">
+                <FaUsers />
+                Users
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/adminDashboard/adminProfile">
                 <CgProfile />
                 Profile
               </NavLink>

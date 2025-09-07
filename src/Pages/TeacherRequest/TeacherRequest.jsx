@@ -38,7 +38,7 @@ const TeacherRequest = () => {
                 <th></th>
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
                 <td>
-                  <img src={data.image} alt="" />
+                  <img className="rounded-full" src={data.image} alt="" />
                 </td>
                 <td className="text-sm md:text-md text-wrap">
                   {data.experience}
@@ -70,13 +70,6 @@ const TeacherRequest = () => {
             ))}
           </tbody>
         </table>
-        {/* : (
-          <img
-            className="w-[80%] h-screen"
-            src="https://i.ibb.co.com/FkJ4Vmtb/58420911-9264746.jpg"
-            alt=""
-          />
-        )*/}
       </div>
     </div>
   );

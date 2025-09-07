@@ -48,7 +48,7 @@ const TeachOnLearnCore = () => {
               />
               <fieldset className="fieldset">
                 <legend className="fieldset-legend">Category</legend>
-                <select defaultValue="Select an Experience" className="select">
+                <select defaultValue="Select a Category" className="select">
                   <option disabled={true}>Select a Category</option>
                   <option>Software Engineer</option>
                   <option>Database Engineer</option>
