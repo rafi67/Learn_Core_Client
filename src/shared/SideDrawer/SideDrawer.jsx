@@ -58,29 +58,37 @@ const SideDrawer = () => {
             </li>
           )}
           {userType?.role === "admin" && (
-            <li>
-              <NavLink to="/adminDashboard/teacherRequest">
-                <IoMdGitPullRequest />
-                Teacher Request
-              </NavLink>
-            </li>
-          )}
-          {userType?.role === "admin" && (
-            <li>
-              <NavLink to="/adminDashboard/users">
-                <FaUsers />
-                Users
-              </NavLink>
-            </li>
-          )}
-          {userType?.role === "admin" && (
-            <li>
-              <NavLink to="/adminDashboard/adminProfile">
-                <CgProfile />
-                Profile
-              </NavLink>
-            </li>
-          )}
+          <li>
+            <NavLink to="/adminDashboard/teacherRequest">
+              <IoMdGitPullRequest />
+              Teacher Request
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "admin" && (
+          <li>
+            <NavLink to="/adminDashboard/users">
+              <FaUsers />
+              Users
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "admin" && (
+          <li>
+          <NavLink to="/adminDashboard/allClasses">
+            <MdClass />
+            All Classes
+          </NavLink>
+        </li>
+        )}
+        {userType?.role === "admin" && (
+          <li>
+            <NavLink to="/adminDashboard/adminProfile">
+              <CgProfile />
+              Profile
+            </NavLink>
+          </li>
+        )}
         </ul>
       </div>
     </div>

@@ -16,6 +16,7 @@ import AdminRoute from "./AdminRoute";
 import TeacherRequest from "../Pages/TeacherRequest/TeacherRequest";
 import TeachOnLearnCore from "../Pages/TeachOnLearnCore/TeachOnLearnCore";
 import Users from "../Pages/Users/Users";
+import AllClasses from "../Pages/AllClasses/AllClasses";
 
 const router = createBrowserRouter([
   {
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: 'users',
         element: <Users/>
+      },
+      {
+        path: 'allClasses',
+        element: <AllClasses/>,
       },
     ],
   },

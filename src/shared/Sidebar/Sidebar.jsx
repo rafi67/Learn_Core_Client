@@ -20,17 +20,27 @@ const Sidebar = () => {
             Home
           </NavLink>
         </li>
-        <li>
-          <NavLink to="/class">
-            <MdClass />
-            All Classes
-          </NavLink>
-        </li>
+        {userType?.role === "student" && (
+          <li>
+            <NavLink to="/class">
+              <MdClass />
+              All Classes
+            </NavLink>
+          </li>
+        )}
         {userType?.role === "student" && (
           <li>
             <NavLink to="/studentDashboard/myEnrollClass">
               <MdEditDocument />
               My Enroll Class
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "student" && (
+          <li>
+            <NavLink to="/studentDashboard/studentProfile">
+              <CgProfile />
+              Profile
             </NavLink>
           </li>
         )}
@@ -52,15 +62,15 @@ const Sidebar = () => {
         )}
         {userType?.role === "admin" && (
           <li>
-            <NavLink to="/adminDashboard/adminProfile">
-              <CgProfile />
-              Profile
+            <NavLink to="/adminDashboard/allClasses">
+              <MdClass />
+              All Classes
             </NavLink>
           </li>
         )}
-        {userType?.role === "student" && (
+        {userType?.role === "admin" && (
           <li>
-            <NavLink to="/studentDashboard/studentProfile">
+            <NavLink to="/adminDashboard/adminProfile">
               <CgProfile />
               Profile
             </NavLink>
