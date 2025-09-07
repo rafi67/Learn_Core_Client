@@ -116,6 +116,11 @@ const Navbar = () => {
                   <Link to="/adminDashboard">My Dashboard</Link>
                 </li>
               )}
+              {userType?.role === "teacher" && (
+                <li>
+                  <Link to="/teacherDashboard">My Dashboard</Link>
+                </li>
+              )}
               <li>
                 <a onClick={handleLogOut}>Logout</a>
               </li>

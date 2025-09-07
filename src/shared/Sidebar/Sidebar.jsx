@@ -6,6 +6,7 @@ import useVerifyUser from "../../hooks/useVerifyUser";
 import { CgProfile } from "react-icons/cg";
 import { IoMdGitPullRequest } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
+import { MdLibraryAdd } from "react-icons/md";
 
 const Sidebar = () => {
   const { userType } = useVerifyUser();
@@ -71,6 +72,22 @@ const Sidebar = () => {
         {userType?.role === "admin" && (
           <li>
             <NavLink to="/adminDashboard/adminProfile">
+              <CgProfile />
+              Profile
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "teacher" && (
+          <li>
+            <NavLink to="/teacherDashboard/addClass">
+              <MdLibraryAdd />
+              Add Class
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "teacher" && (
+          <li>
+            <NavLink to="/teacherDashboard/teacherProfile">
               <CgProfile />
               Profile
             </NavLink>

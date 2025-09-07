@@ -7,9 +7,9 @@ import { CgProfile } from "react-icons/cg";
 import { MdOutlineMenu } from "react-icons/md";
 import { IoMdGitPullRequest } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
-
+import { MdLibraryAdd } from "react-icons/md";
 const SideDrawer = () => {
-  const { userType } = useVerifyUser();
+  const { userType } = useVerifyUser();;
 
   return (
     <div className="drawer w-[10%] block lg:hidden">
@@ -58,37 +58,53 @@ const SideDrawer = () => {
             </li>
           )}
           {userType?.role === "admin" && (
-          <li>
-            <NavLink to="/adminDashboard/teacherRequest">
-              <IoMdGitPullRequest />
-              Teacher Request
-            </NavLink>
-          </li>
-        )}
-        {userType?.role === "admin" && (
-          <li>
-            <NavLink to="/adminDashboard/users">
-              <FaUsers />
-              Users
-            </NavLink>
-          </li>
-        )}
-        {userType?.role === "admin" && (
-          <li>
-          <NavLink to="/adminDashboard/allClasses">
-            <MdClass />
-            All Classes
-          </NavLink>
-        </li>
-        )}
-        {userType?.role === "admin" && (
-          <li>
-            <NavLink to="/adminDashboard/adminProfile">
-              <CgProfile />
-              Profile
-            </NavLink>
-          </li>
-        )}
+            <li>
+              <NavLink to="/adminDashboard/teacherRequest">
+                <IoMdGitPullRequest />
+                Teacher Request
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/adminDashboard/users">
+                <FaUsers />
+                Users
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/adminDashboard/allClasses">
+                <MdClass />
+                All Classes
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "admin" && (
+            <li>
+              <NavLink to="/adminDashboard/adminProfile">
+                <CgProfile />
+                Profile
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "teacher" && (
+            <li>
+              <NavLink to="/teacherDashboard/addClass">
+                <MdLibraryAdd />
+                Add Class
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "teacher" && (
+            <li>
+              <NavLink to="/teacherDashboard/teacherProfile">
+                <CgProfile />
+                Profile
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>

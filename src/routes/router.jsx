@@ -7,6 +7,7 @@ import SignUp from "../Pages/SignUp/SignUp";
 import ClassDetails from "../Pages/ClassDetails/ClassDetails";
 import PrivateRoute from "./PrivateRoute";
 import StudentRoute from "./StudentRoute";
+import TeacherRoute from "./TeacherRoute";
 import Dashboard from "../Layout/Dashboard";
 import PageNotFound from "../Pages/PageNotFound/PageNotFound";
 import MyEnrollClasses from "../Pages/MyEnrollClasses/MyEnrollClasses";
@@ -17,6 +18,7 @@ import TeacherRequest from "../Pages/TeacherRequest/TeacherRequest";
 import TeachOnLearnCore from "../Pages/TeachOnLearnCore/TeachOnLearnCore";
 import Users from "../Pages/Users/Users";
 import AllClasses from "../Pages/AllClasses/AllClasses";
+import AddClass from "../Pages/AddClass/AddClass";
 
 const router = createBrowserRouter([
   {
@@ -97,12 +99,30 @@ const router = createBrowserRouter([
         element: <TeacherRequest />,
       },
       {
-        path: 'users',
-        element: <Users/>
+        path: "users",
+        element: <Users />,
       },
       {
-        path: 'allClasses',
-        element: <AllClasses/>,
+        path: "allClasses",
+        element: <AllClasses />,
+      },
+    ],
+  },
+  {
+    path: "teacherDashboard",
+    element: (
+      <TeacherRoute>
+        <Dashboard />
+      </TeacherRoute>
+    ),
+    children: [
+      {
+        path: "addClass",
+        element: <AddClass />,
+      },
+      {
+        path: "teacherProfile",
+        element: <Profile />,
       },
     ],
   },

@@ -13,6 +13,8 @@ const AllClasses = () => {
     refetchOnWindowFocus: false,
   });
 
+  console.log(allCourses);
+
   let i = 1;
 
   return (
@@ -51,7 +53,9 @@ const AllClasses = () => {
                 </td>
                 <td>
                   <button
-                    disabled={data.status !== "accepted"}
+                    disabled={
+                      data.status === "accepted" || data.status == "rejected"
+                    }
                     className="btn text-sm"
                   >
                     Approve
@@ -59,25 +63,21 @@ const AllClasses = () => {
                 </td>
                 <td>
                   <button
-                    disabled={data.status !== "accepted"}
+                    disabled={
+                      data.status === "accepted" || data.status == "rejected"
+                    }
                     className="btn text-sm"
                   >
                     Reject
                   </button>
                 </td>
                 <td>
-                  <progress
-                    className="progress progress-info w-[100%]"
-                    value={
-                      data.totalAssignment > 0 && data.totalSubmission > 0
-                        ? (data.totalSubmission / data.totalAssignment) * 100
-                        : 0
-                    }
-                    max="100"
-                  ></progress>
-                  {data.totalAssignment > 0 && data.totalSubmission > 0
-                    ? (data.totalSubmission / data.totalAssignment) * 100
-                    : 0 + "%"}
+                  <button
+                    disabled={!(data.status === "accepted")}
+                    className="btn"
+                  >
+                    Progress
+                  </button>
                 </td>
               </tr>
             ))}

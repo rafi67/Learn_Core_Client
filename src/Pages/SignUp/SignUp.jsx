@@ -153,8 +153,6 @@ const SignUp = () => {
               <Link className="text-[14px]" to="/signIn">
                 Already have an account
               </Link>
-              <div className="divider">OR</div>
-              <SocialLogin />
             </form>
           </div>
         </div>
