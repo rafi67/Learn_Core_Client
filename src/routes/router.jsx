@@ -19,6 +19,7 @@ import TeachOnLearnCore from "../Pages/TeachOnLearnCore/TeachOnLearnCore";
 import Users from "../Pages/Users/Users";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import AddClass from "../Pages/AddClass/AddClass";
+import MyClass from "../Pages/MyClass/MyClass";
 
 const router = createBrowserRouter([
   {
@@ -123,6 +124,10 @@ const router = createBrowserRouter([
       {
         path: "teacherProfile",
         element: <Profile />,
+      },
+      {
+        path: "myClass",
+        element: <MyClass/>
       },
     ],
   },

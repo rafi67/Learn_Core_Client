@@ -7,6 +7,7 @@ import { CgProfile } from "react-icons/cg";
 import { IoMdGitPullRequest } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { MdLibraryAdd } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
 
 const Sidebar = () => {
   const { userType } = useVerifyUser();
@@ -82,6 +83,14 @@ const Sidebar = () => {
             <NavLink to="/teacherDashboard/addClass">
               <MdLibraryAdd />
               Add Class
+            </NavLink>
+          </li>
+        )}
+        {userType?.role === "teacher" && (
+          <li>
+            <NavLink to="/teacherDashboard/myClass">
+              <SiGoogleclassroom />
+              My Class
             </NavLink>
           </li>
         )}

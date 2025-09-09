@@ -8,8 +8,9 @@ import { MdOutlineMenu } from "react-icons/md";
 import { IoMdGitPullRequest } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { MdLibraryAdd } from "react-icons/md";
+import { SiGoogleclassroom } from "react-icons/si";
 const SideDrawer = () => {
-  const { userType } = useVerifyUser();;
+  const { userType } = useVerifyUser();
 
   return (
     <div className="drawer w-[10%] block lg:hidden">
@@ -94,6 +95,14 @@ const SideDrawer = () => {
               <NavLink to="/teacherDashboard/addClass">
                 <MdLibraryAdd />
                 Add Class
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "teacher" && (
+            <li>
+              <NavLink to="/teacherDashboard/myClass">
+                <SiGoogleclassroom />
+                My Class
               </NavLink>
             </li>
           )}

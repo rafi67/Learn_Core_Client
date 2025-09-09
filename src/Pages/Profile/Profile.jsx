@@ -6,6 +6,7 @@ const Profile = () => {
 
   return (
     <div className="p-4 w-[80%]">
+      <title>Profile</title>
       <fieldset className="fieldset space-y-4">
         <div className="avatar relative left-25">
           <div className="w-24 rounded-full">

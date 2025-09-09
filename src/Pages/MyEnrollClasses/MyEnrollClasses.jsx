@@ -10,17 +10,15 @@ const MyEnrollClasses = () => {
   const { data: enrollClass = [], isLoading } = useQuery({
     queryKey: ["myEnrollClass"],
     queryFn: async () =>
-      get(`/myEnrollClass?email=${user.email}`).then((res) =>
-        res.data
-      ),
+      get(`/myEnrollClass?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
 
-  if(isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="items-start w-full md:w-[90%] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5 p-2">
-      <title>My Enroll Class</title>
+      <title>My Enroll Classes</title>
       {enrollClass.map((data) => (
         <EnrollClassesCard key={data._id} data={data} />
       ))}

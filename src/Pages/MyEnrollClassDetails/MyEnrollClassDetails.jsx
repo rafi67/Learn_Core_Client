@@ -93,6 +93,7 @@ const MyEnrollClassDetails = () => {
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
+      <title>My Enroll Class Details</title>
       <button
         onClick={() => document.getElementById("my_modal_2").showModal()}
         className={`${
