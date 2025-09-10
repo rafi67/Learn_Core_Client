@@ -13,7 +13,7 @@ const Sidebar = () => {
   const { userType } = useVerifyUser();
 
   return (
-    <div className="w-64 hidden lg:block min-h-screen bg-[#1A2131] text-white">
+    <div className="w-64 hidden xl:block min-h-screen bg-[#1A2131] text-white">
       <ul className="w-full menu p-4">
         {/* shared nav links */}
         <li>

@@ -13,7 +13,7 @@ const SideDrawer = () => {
   const { userType } = useVerifyUser();
 
   return (
-    <div className="drawer w-[10%] block lg:hidden">
+    <div className="drawer w-[10%] block xl:hidden">
       <input id="my-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         {/* Page content here */}

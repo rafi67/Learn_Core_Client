@@ -20,6 +20,7 @@ import Users from "../Pages/Users/Users";
 import AllClasses from "../Pages/AllClasses/AllClasses";
 import AddClass from "../Pages/AddClass/AddClass";
 import MyClass from "../Pages/MyClass/MyClass";
+import MyClassDetails from "../Pages/MyClassDetails/MyClassDetails";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const router = createBrowserRouter([
       {
         path: "myClass",
         element: <MyClass/>
+      },
+      {
+        path: "myClassDetails/:id",
+        element: <MyClassDetails/>
       },
     ],
   },

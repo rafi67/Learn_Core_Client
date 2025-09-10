@@ -158,14 +158,14 @@ const MyEnrollClassDetails = () => {
                       className="input"
                       name="docUrl"
                       onChange={(e) => setDocUrl(e.target.value)}
-                      disabled={!isSubmitted[data._id]}
+                      disabled={isSubmitted[data._id]}
                     />
                   </td>
                   <td>
                     <button
                       className="btn text-sm"
                       onClick={() => submitAssignment(data._id)}
-                      disabled={!isSubmitted[data._id]}
+                      disabled={isSubmitted[data._id]}
                     >
                       Submit
                     </button>

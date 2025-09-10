@@ -1,11 +1,10 @@
-import { useContext } from "react";
-import AuthContext from "../../context/AuthContext";
 import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
-  const { signInWithGoogle } = useContext(AuthContext);
+  const { signInWithGoogle } = useAuth();
   const { post } = useAxiosSecure();
   const navigate = useNavigate();
 
@@ -28,7 +27,15 @@ const SocialLogin = () => {
         });
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
   };
 
   return (

@@ -118,9 +118,9 @@ const SignIn = () => {
               )}
               <button className="btn bg-[#FDC800] mt-4">Sign In</button>
               <Link className="text-[14px]" to='/signUp'>Don't have an account, create new</Link>
-              <div className="divider">OR</div>
-              <SocialLogin />
             </form>
+            <div className="divider">OR</div>
+              <SocialLogin />
           </div>
         </div>
       </div>

@@ -135,7 +135,7 @@ const ClassDetails = () => {
           </>
         ) : (
           <Link
-            to="/studentDashboard/myEnrollClass"
+            to={`/studentDashboard/enrollClassDetails/${id}`}
             className="btn bg-[#FDC800] w-full text-lg"
           >
             Class Details

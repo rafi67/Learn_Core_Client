@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const MyClassCard = ({ data }) => {
   return (
     <div className="card w-screen mx-auto md:w-[98%] lg:w-[335px] rounded-none bg-gray-100">
@@ -26,12 +28,13 @@ const MyClassCard = ({ data }) => {
           <button className="btn btn-warning text-white border-0">
             Delete
           </button>
-          <button
+          <Link
+            to={`/teacherDashboard/myclassDetails/${data._id}`}
             className="btn bg-gray-400 text-white border-0"
             disabled={data.status === "pending"}
           >
             See Details
-          </button>
+          </Link>
         </div>
       </div>
     </div>
