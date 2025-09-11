@@ -15,15 +15,14 @@ const ClassDetails = () => {
   const { get } = useAxiosSecure();
   const { user } = useAuth();
   const [selected, setSelected] = useState(1);
-  const {id} = useParams();
+  const { id } = useParams();
 
   const { data: paid = false } = useQuery({
     queryKey: ["paid"],
     queryFn: async () =>
-      await get(`/verifyPayment/?email=${user.email}&classId=${id}`).then((res) => {
-        console.log(res.data);
-        return res.data.isPaid;
-      }),
+      await get(`/verifyPayment/?email=${user.email}&classId=${id}`).then(
+        (res) => res.data.isPaid
+      ),
     refetchOnWindowFocus: false,
   });
 
