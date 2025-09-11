@@ -1,10 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const TeacherRequest = () => {
-  const { get } = useAxiosSecure();
+  const { get, patch } = useAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const { data: teacherRequest = [] } = useQuery({
     queryKey: ["teacherRequest"],
@@ -12,6 +14,32 @@ const TeacherRequest = () => {
       await get(`/teacherRequest?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
+
+  const patchMutation = useMutation({
+    mutationFn: (requestData) =>
+      patch(`/teacherStatus?teacherId=${requestData.id}&email=${user.email}`, {
+        status: requestData.status,
+      }),
+    onSuccess: () => {
+      Swal.fire({
+        title: "Accepted!",
+        text: "Teacher request has been accepted successfully.",
+        icon: "success",
+      });
+      queryClient.invalidateQueries(["teacherRequest"]);
+    },
+    onError: (err) => {
+      Swal.fire({
+        title: "Failed",
+        text: `${err.message}`,
+        icon: "error",
+      });
+    },
+  });
+
+  const handleStatus = (id, status) => {
+    patchMutation.mutate({ id, status });
+  };
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
@@ -39,7 +67,7 @@ const TeacherRequest = () => {
                 <th></th>
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
                 <td>
-                  <img className="rounded-full" src={data.image} alt="" />
+                  <img className="rounded-full w-[40%] h-[40%]" src={data.image} alt="" />
                 </td>
                 <td className="text-sm md:text-md text-wrap">
                   {data.experience}
@@ -53,6 +81,7 @@ const TeacherRequest = () => {
                       data.status === "accepted" || data.status === "rejected"
                     }
                     className="btn text-sm"
+                    onClick={() => handleStatus(data._id, "accepted")}
                   >
                     Approve
                   </button>
@@ -63,6 +92,7 @@ const TeacherRequest = () => {
                     disabled={
                       data.status === "accepted" || data.status === "rejected"
                     }
+                    onClick={() => handleStatus(data._id, "rejected")}
                   >
                     Reject
                   </button>

@@ -15,22 +15,27 @@ const SkilledInstructor = () => {
   });
 
   return (
-    <div className="mt-20 mb-20">
-      <h1 className="text-4xl font-bold text-center">Our Skilled Instructor</h1>
+    <div className="w-screen xl:max-w-screen-lg mx-auto mt-20 mb-20">
+      <h1 className="text-4xl font-bold text-center mb-10">Our Skilled Instructor</h1>
       {/* card section */}
       <Swiper
+        pagination={{
+          clickable: true,
+        }}
         autoplay={true}
-        pagination={true}
         modules={[Pagination, Autoplay]}
         style={{
+          "--swiper-navigation-color": "#FDC800",
           "--swiper-pagination-color": "#FDC800",
         }}
-        className="mySwiper mt-10"
+        slidesPerView={1}
+        centeredSlides={true}
+        className="mySwiper"
       >
         {instructorData.map((i) => (
           <SwiperSlide>
-            <div className="card bg-gray-100 w-[80%] xl:w-[500px] flex flex-col lg:flex-row items-center lg:items-start mx-auto">
-              <figure>
+            <div className="card bg-gray-100 h-[200px] w-[80%] xl:w-[500px] flex flex-col lg:flex-row items-center lg:items-center mx-auto">
+              <figure className="ml-2">
                 <img
                   className="rounded-full w-[130px] h-[130px]"
                   src={i.photo}
