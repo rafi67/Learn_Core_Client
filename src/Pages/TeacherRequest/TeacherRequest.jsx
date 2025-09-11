@@ -67,7 +67,11 @@ const TeacherRequest = () => {
                 <th></th>
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
                 <td>
-                  <img className="rounded-full w-[40%] h-[40%]" src={data.image} alt="" />
+                  <img
+                    className="rounded-full w-[40%] h-[40%]"
+                    src={data.image}
+                    alt=""
+                  />
                 </td>
                 <td className="text-sm md:text-md text-wrap">
                   {data.experience}
@@ -81,7 +85,9 @@ const TeacherRequest = () => {
                       data.status === "accepted" || data.status === "rejected"
                     }
                     className="btn text-sm"
-                    onClick={() => handleStatus(data._id, "accepted")}
+                    onClick={() => {
+                      handleStatus(data.userId, "accepted");
+                    }}
                   >
                     Approve
                   </button>
@@ -92,7 +98,7 @@ const TeacherRequest = () => {
                     disabled={
                       data.status === "accepted" || data.status === "rejected"
                     }
-                    onClick={() => handleStatus(data._id, "rejected")}
+                    onClick={() => handleStatus(data.userId, "rejected")}
                   >
                     Reject
                   </button>

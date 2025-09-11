@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useParams } from "react-router";
@@ -23,7 +23,7 @@ const MyEnrollClassDetails = () => {
     refetchOnWindowFocus: false,
   });
 
-  const { data: isEvaluate } = useQuery({
+  const { data: isEvaluate, refetch } = useQuery({
     queryKey: ["evaluation"],
     queryFn: async () =>
       await get(`/verifyFeedback?email=${user.email}&classId=${id}`).then(
@@ -32,7 +32,31 @@ const MyEnrollClassDetails = () => {
     refetchOnWindowFocus: false,
   });
 
-  const { data: isSubmitted = {} } = useQuery({
+  const feedbackPostMutation = useMutation({
+    mutationFn: (feedback) => post(`/feedback?email=${user.email}`, feedback),
+    onSuccess: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Feedback has been submitted successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      document.getElementById("my_modal_2").close();
+      refetch();
+    },
+    onError: (err) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+  });
+
+  const { data: isSubmitted = {}, refetch: isSubmittedRefetch } = useQuery({
     queryKey: ["submitted"],
     queryFn: async () =>
       await get(`/verifySubmission?email=${user.email}&classId=${id}`).then(
@@ -41,14 +65,10 @@ const MyEnrollClassDetails = () => {
     refetchOnWindowFocus: false,
   });
 
-  const submitAssignment = async (id) => {
-    const assignment = {
-      assignmentId: id,
-      Url: docUrl,
-    };
-
-    const res = await post(`/submitAssignment?email=${user.email}`, assignment);
-    if (res.data.insertedId) {
+  const assignmentPostMutation = useMutation({
+    mutationFn: (assignment) =>
+      post(`/submitAssignment?email=${user.email}`, assignment),
+    onSuccess: () => {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -56,15 +76,26 @@ const MyEnrollClassDetails = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-    } else {
+      isSubmittedRefetch();
+    },
+    onError: (err) => {
       Swal.fire({
         position: "top-end",
         icon: "error",
-        title: "Failed to submit assignment",
+        title: `${err.message}`,
         showConfirmButton: false,
         timer: 1500,
       });
-    }
+    },
+  });
+
+  const submitAssignment = async (id) => {
+    const assignment = {
+      assignmentId: id,
+      Url: docUrl,
+    };
+
+    assignmentPostMutation.mutate(assignment);
   };
 
   const handleSubmit = async (e) => {
@@ -76,17 +107,7 @@ const MyEnrollClassDetails = () => {
       feedbackText: description,
       rating: rating,
     };
-    const res = await post(`/feedback?email=${user.email}`, feedback);
-
-    if (res.data) {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Feedback has been submitted successfully",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-    }
+    feedbackPostMutation.mutate(feedback);
   };
 
   let i = 0;
