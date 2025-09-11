@@ -1,10 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import { Link } from "react-router";
+import Swal from "sweetalert2";
 
 const AllClasses = () => {
-  const { get } = useAxiosSecure();
+  const { get, patch } = useAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const { data: allCourses = [] } = useQuery({
     queryKey: ["allCourses"],
@@ -13,7 +16,35 @@ const AllClasses = () => {
     refetchOnWindowFocus: false,
   });
 
-  console.log(allCourses);
+  const patchMutation = useMutation({
+    mutationFn: (data) =>
+      patch(`/classStatus?email=${user.email}&classId=${data.id}`, {
+        status: data.action,
+      }),
+    onSuccess: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Approved Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      queryClient.invalidateQueries(["allCourses"]);
+    },
+    onError: (err) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+  });
+
+  const handleSubmit = (action, id) => {
+    patchMutation.mutate({ action, id });
+  };
 
   let i = 1;
 
@@ -57,6 +88,7 @@ const AllClasses = () => {
                       data.status === "accepted" || data.status == "rejected"
                     }
                     className="btn text-sm"
+                    onClick={() => handleSubmit("accepted", data._id)}
                   >
                     Approve
                   </button>
@@ -67,17 +99,19 @@ const AllClasses = () => {
                       data.status === "accepted" || data.status == "rejected"
                     }
                     className="btn text-sm"
+                    onClick={() => handleSubmit("rejected", data._id)}
                   >
                     Reject
                   </button>
                 </td>
                 <td>
-                  <button
+                  <Link
+                    to={`/adminDashboard/myClassDetails/${data._id}`}
                     disabled={!(data.status === "accepted")}
                     className="btn"
                   >
                     Progress
-                  </button>
+                  </Link>
                 </td>
               </tr>
             ))}

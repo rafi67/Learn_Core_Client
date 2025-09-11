@@ -6,12 +6,14 @@ import useAuth from "../../hooks/useAuth";
 import { FaPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import useVerifyUser from "../../hooks/useVerifyUser";
 
 const MyClassDetails = () => {
   const { id } = useParams();
   const { get, post } = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const { userType } = useVerifyUser();
 
   const {
     register,
@@ -31,7 +33,7 @@ const MyClassDetails = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      queryClient.invalidateQueries(['myClass']);
+      queryClient.invalidateQueries(["myClass"]);
       reset();
     },
     onError: (err) => {
@@ -45,10 +47,13 @@ const MyClassDetails = () => {
     },
   });
 
+  const url = `/classProgress`;
+  const url2 = `/myClassProgress`;
+
   const { data: classProgress = [] } = useQuery({
     queryKey: ["classProgress"],
     queryFn: async () =>
-      await get(`/myClassProgress?email=${user.email}&classId=${id}`).then(
+      await get(`${userType?.role=='admin'? url : url2}?email=${user.email}&classId=${id}`).then(
         (res) => res.data
       ),
     refetchOnWindowFocus: false,
@@ -134,6 +139,7 @@ const MyClassDetails = () => {
       <button
         className="btn text-white text-md bg-[#137333] rounded-full"
         onClick={() => document.getElementById("my_modal_5").showModal()}
+        disabled={userType?.role=='admin'}
       >
         <FaPlus />
         Create

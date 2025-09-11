@@ -108,6 +108,10 @@ const router = createBrowserRouter([
         path: "allClasses",
         element: <AllClasses />,
       },
+       {
+        path: "myClassDetails/:id",
+        element: <MyClassDetails/>
+      },
     ],
   },
   {

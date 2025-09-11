@@ -16,10 +16,7 @@ const Users = () => {
   });
 
   const patchMutation = useMutation({
-    mutationFn: (id) => {
-      console.log(id);
-      return patch(`/makeAdmin?email=${user.email}&userId=${id}`);
-    },
+    mutationFn: (id) => patch(`/makeAdmin?email=${user.email}&userId=${id}`),
     onSuccess: () => {
       Swal.fire({
         position: "top-end",
