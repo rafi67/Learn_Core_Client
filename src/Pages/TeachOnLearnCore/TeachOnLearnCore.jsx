@@ -3,10 +3,12 @@ import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
+import useVerifyUser from "../../hooks/useVerifyUser";
 
 const TeachOnLearnCore = () => {
   const { user } = useAuth();
   const { post } = useAxiosSecure();
+  const {userType} = useVerifyUser();
 
   const {
     register,
@@ -117,7 +119,7 @@ const TeachOnLearnCore = () => {
                   <p className="text-lg text-red-500">category required</p>
                 )}
               </fieldset>
-              <button className="btn btn-neutral mt-4">
+              <button className="btn btn-neutral mt-4" disabled={userType?.role==="student"||userType?.role==="admin"}>
                 Submit for Review
               </button>
             </form>

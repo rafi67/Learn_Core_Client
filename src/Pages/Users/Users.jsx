@@ -1,10 +1,12 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Users = () => {
-  const { get } = useAxiosSecure();
+  const { get, patch } = useAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const { data: users = [] } = useQuery({
     queryKey: ["users"],
@@ -12,6 +14,36 @@ const Users = () => {
       await get(`/users?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
+
+  const patchMutation = useMutation({
+    mutationFn: (id) => {
+      console.log(id);
+      return patch(`/makeAdmin?email=${user.email}&userId=${id}`);
+    },
+    onSuccess: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Successfully done",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      queryClient.invalidateQueries(["users"]);
+    },
+    onError: (err) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+  });
+
+  const handleSubmit = (id) => {
+    patchMutation.mutate(id);
+  };
 
   let i = 1;
 
@@ -41,6 +73,7 @@ const Users = () => {
                   <button
                     className="btn text-sm"
                     disabled={data.role === "admin"}
+                    onClick={() => handleSubmit(data._id)}
                   >
                     Make Admin
                   </button>
