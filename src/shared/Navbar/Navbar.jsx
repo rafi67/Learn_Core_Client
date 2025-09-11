@@ -108,17 +108,17 @@ const Navbar = () => {
               </li>
               {userType?.role === "student" && (
                 <li>
-                  <Link to="/studentDashboard">My Dashboard</Link>
+                  <Link to="/studentDashboard/myEnrollClass">My Dashboard</Link>
                 </li>
               )}
               {userType?.role === "admin" && (
                 <li>
-                  <Link to="/adminDashboard">My Dashboard</Link>
+                  <Link to="/adminDashboard/teacherRequest">My Dashboard</Link>
                 </li>
               )}
               {userType?.role === "teacher" && (
                 <li>
-                  <Link to="/teacherDashboard">My Dashboard</Link>
+                  <Link to="/teacherDashboard/addClass">My Dashboard</Link>
                 </li>
               )}
               <li>
