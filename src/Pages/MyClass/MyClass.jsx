@@ -16,7 +16,7 @@ const MyClass = () => {
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5 p-2">
       <title>My Class</title>
       {
-        myClass.map(data => <MyClassCard data={data}/>)
+        myClass.map(data => <MyClassCard key={data._id} data={data}/>)
       }
     </div>
   );

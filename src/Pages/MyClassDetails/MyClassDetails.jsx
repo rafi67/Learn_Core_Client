@@ -1,7 +1,7 @@
 import CountUp from "react-countup";
 import { useParams } from "react-router";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import { FaPlus } from "react-icons/fa";
 import { useForm } from "react-hook-form";
@@ -11,6 +11,7 @@ const MyClassDetails = () => {
   const { id } = useParams();
   const { get, post } = useAxiosSecure();
   const { user } = useAuth();
+  const queryClient = useQueryClient();
 
   const {
     register,
@@ -18,6 +19,31 @@ const MyClassDetails = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const postMutation = useMutation({
+    mutationFn: (data) =>
+      post(`/addAssignment?email=${user.email}&classId=${id}`, data),
+    onSuccess: () => {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Assignment Submitted Successfully",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      queryClient.invalidateQueries(['myClass']);
+      reset();
+    },
+    onError: (err) => {
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: `${err.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    },
+  });
 
   const { data: classProgress = [] } = useQuery({
     queryKey: ["classProgress"],
@@ -29,30 +55,8 @@ const MyClassDetails = () => {
   });
 
   const submit = (data) => {
-    console.log(data);
-    post(`/addAssignment?email=${user.email}&classId=${id}`, data)
-      .then((res) => {
-        if (res.data.insertedId != null) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Assignment Submitted Successfully",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          reset();
-          document.getElementById("my_modal_5").close();
-        }
-      })
-      .catch((err) =>
-        Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: `${err.message}`,
-          showConfirmButton: false,
-          timer: 1500,
-        })
-      );
+    postMutation.mutate(data);
+    document.getElementById("my_modal_5").close();
   };
 
   return (
