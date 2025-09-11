@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const BecomeAnInstructor = () => {
   return (
     <div className="mt-20">
@@ -15,7 +17,7 @@ const BecomeAnInstructor = () => {
               role that blends teaching, mentorship, and leadership to create
               lasting impact.
             </p>
-            <button className="btn bg-[#FDC800]">Start teaching today</button>
+            <Link to="/teachOnLearnCore" className="btn bg-[#FDC800]">Start teaching today</Link>
           </div>
         </div>
       </div>
