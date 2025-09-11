@@ -1,7 +1,7 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useState } from "react";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAuth from "../../../hooks/useAuth";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router";
@@ -13,6 +13,29 @@ const CheckoutForm = ({ price, id }) => {
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
   const navigate = useNavigate();
+
+  const queryClient = useQueryClient();
+
+  const PostMutation = useMutation({
+    mutationFn: (payment) => axiosSecure.post("/payments", payment),
+    onSuccess: () => {
+       Swal.fire({
+        title: "Payment Successful",
+        icon: "success",
+        draggable: true,
+      });
+      queryClient.invalidateQueries(['paid']);
+      document.getElementById("my_modal_5").close();
+      navigate("/studentDashBoard/myEnrollClass");
+    },
+    onError: (err) => {
+      Swal.fire({
+        title: `${err.message}`,
+        icon: "error",
+        draggable: true,
+      });
+    },
+  });
 
   const { data: clientSecret = "" } = useQuery({
     queryKey: ["clientSecret"],
@@ -78,15 +101,7 @@ const CheckoutForm = ({ price, id }) => {
         transactionId: paymentIntent.id,
         classId: id,
       };
-      const res = await axiosSecure.post("/payments", payment);
-      console.log(res.data);
-      document.getElementById("my_modal_5").close();
-      Swal.fire({
-        title: "Payment Successful",
-        icon: "success",
-        draggable: true,
-      });
-      navigate("/studentDashBoard/myEnrollClass");
+      PostMutation.mutate(payment);
     }
   };
 
