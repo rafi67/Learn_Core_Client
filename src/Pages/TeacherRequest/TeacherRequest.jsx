@@ -68,7 +68,7 @@ const TeacherRequest = () => {
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
                 <td>
                   <img
-                    className="rounded-full w-[40%] h-[40%]"
+                    className="rounded-full w-[45%] h-[45%]"
                     src={data.image}
                     alt=""
                   />

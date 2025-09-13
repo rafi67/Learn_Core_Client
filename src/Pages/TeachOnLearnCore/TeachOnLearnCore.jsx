@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
@@ -7,8 +7,15 @@ import useVerifyUser from "../../hooks/useVerifyUser";
 
 const TeachOnLearnCore = () => {
   const { user } = useAuth();
-  const { post } = useAxiosSecure();
+  const { post, get, patch } = useAxiosSecure();
   const { userType } = useVerifyUser();
+
+  const { data: Status = [], refetch } = useQuery({
+    queryKey: ["Status"],
+    queryFn: async () =>
+      get(`/status?email=${user.email}`).then((res) => res.data),
+    refetchOnWindowFocus: false,
+  });
 
   const {
     register,
@@ -26,7 +33,27 @@ const TeachOnLearnCore = () => {
         text: "Teacher request has been submitted successfully.",
         icon: "success",
       });
+      refetch();
       reset();
+    },
+    onError: (err) => {
+      Swal.fire({
+        title: "Failed to submit teacher request",
+        text: `${err.message}`,
+        icon: "error",
+      });
+    },
+  });
+  const patchMutation = useMutation({
+    mutationFn: (status) =>
+      patch(`/anotherTeacherRequest?email=${user.email}`, {status: status}),
+    onSuccess: () => {
+      Swal.fire({
+        title: "Submitted!",
+        text: "Teacher request has been resubmitted successfully.",
+        icon: "success",
+      });
+      refetch();
     },
     onError: (err) => {
       Swal.fire({
@@ -47,6 +74,11 @@ const TeachOnLearnCore = () => {
 
     postMutation.mutate(teacherRequest);
   };
+
+  const resubmit = (e) => {
+    e.preventDefault();
+    patchMutation.mutate('pending');
+  }
 
   return (
     <div className="hero bg-base-200 min-h-screen">
@@ -82,6 +114,7 @@ const TeachOnLearnCore = () => {
                   <select
                     defaultValue="Select an Experience"
                     className="select"
+                    disabled={Status[0]?.status === "rejected"}
                     {...register("experience", { required: true })}
                   >
                     <option disabled={true}>Select an Experience</option>
@@ -89,7 +122,7 @@ const TeachOnLearnCore = () => {
                     <option>Experienced</option>
                     <option>Mid-Level</option>
                   </select>
-                  {errors.experience?.type === "required" && (
+                  {errors.experience?.type === "required" && Status[0]?.status !== "rejected" && (
                     <p className="text-lg text-red-500">experience required</p>
                   )}
                 </fieldset>
@@ -99,9 +132,10 @@ const TeachOnLearnCore = () => {
                   className="input"
                   placeholder="Title"
                   name="title"
+                  disabled={Status[0]?.status === "rejected"}
                   {...register("title", { required: true })}
                 />
-                {errors.title?.type === "required" && (
+                {errors.title?.type === "required" && Status[0]?.status !== "rejected" && (
                   <p className="text-lg text-red-500">title required</p>
                 )}
                 <fieldset className="fieldset">
@@ -109,6 +143,7 @@ const TeachOnLearnCore = () => {
                   <select
                     defaultValue="Select a Category"
                     className="select"
+                    disabled={Status[0]?.status == "rejected"}
                     {...register("category", { required: true })}
                   >
                     <option disabled={true}>Select a Category</option>
@@ -116,18 +151,27 @@ const TeachOnLearnCore = () => {
                     <option>Database Engineer</option>
                     <option>Mobile app Developer</option>
                   </select>
-                  {errors.category?.type === "required" && (
+                  {errors.category?.type === "required" && Status[0]?.status !== "rejected" && (
                     <p className="text-lg text-red-500">category required</p>
                   )}
                 </fieldset>
-                <button
-                  className="btn btn-neutral mt-4"
-                  disabled={
-                    userType?.role === "student" || userType?.role === "admin"
-                  }
-                >
-                  Submit for Review
-                </button>
+                {Status[0]?.status == "rejected" ? (
+                  <button
+                    className="btn btn-neutral mt-4"
+                    onClick={resubmit}
+                  >
+                    Submit for another
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-neutral mt-4"
+                    disabled={
+                      userType?.role === "student" || userType?.role === "admin" || Status[0]?.status === "pending"
+                    }
+                  >
+                    Submit for Review
+                  </button>
+                )}
               </form>
             </div>
           </div>
