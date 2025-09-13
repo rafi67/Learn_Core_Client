@@ -1,10 +1,13 @@
 import { Link } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useVerifyUser from "../../hooks/useVerifyUser";
+import { useState } from "react";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
   const { userType } = useVerifyUser();
+
+  const [selected, setSelected] = useState(0);
 
   const handleLogOut = () => {
     logOut()
@@ -68,20 +71,35 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/" className="hover:text-[#FDC800] hover:bg-transparent">
+            <Link
+              to="/"
+              className={`hover:text-[#FDC800] ${
+                selected == 1 && "bg-[#FDC800]"
+              } hover:bg-transparent`}
+              onClick={() => setSelected(1)}
+            >
               Home
             </Link>
           </li>
           <li>
             <Link
               to="/class"
-              className="hover:text-[#FDC800] hover:bg-transparent"
+              className={`hover:text-[#FDC800] ${
+                selected == 2 && "bg-[#FDC800]"
+              } hover:bg-transparent`}
+              onClick={() => setSelected(2)}
             >
               All Classes
             </Link>
           </li>
           <li>
-            <Link to="/teachOnLearnCore" className="hover:text-[#FDC800] hover:bg-transparent">
+            <Link
+              to="/teachOnLearnCore"
+              className={`hover:text-[#FDC800] ${
+                selected == 3 && "bg-[#FDC800]"
+              } hover:bg-transparent`}
+              onClick={() => setSelected(3)}
+            >
               Teach on LearnCore
             </Link>
           </li>

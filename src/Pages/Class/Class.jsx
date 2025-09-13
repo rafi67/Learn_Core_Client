@@ -14,14 +14,16 @@ const Class = () => {
     refetchOnWindowFocus: false,
   });
 
-  if(error) return <p>Error</p>;
+  if (error) return <p>Error</p>;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
-      <title>All Classes</title>
-      {Classes.map((cl) => (
-        <ClassCard key={cl._id} data={cl} />
-      ))}
+    <div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 my-5">
+        <title>All Classes</title>
+        {Classes.map((cl) => (
+          <ClassCard key={cl._id} data={cl} />
+        ))}
+      </div>
     </div>
   );
 };
