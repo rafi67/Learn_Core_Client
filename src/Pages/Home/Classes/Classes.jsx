@@ -7,11 +7,12 @@ import "swiper/css/pagination";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import Loading from "../../../shared/Loading/Loading";
 
 const Classes = () => {
   const { get } = useAxiosPublic();
 
-  const { data: Class = [] } = useQuery({
+  const { data: Class = [], isLoading } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => await get("/classes").then((res) => res.data),
     refetchOnWindowFocus: false,
@@ -35,6 +36,8 @@ const Classes = () => {
 
     return () => window.removeEventListener("resize", handleResize); // remove the event listener on unmount
   }, []);
+
+  if(isLoading) return <Loading/>
 
   return (
     <div className="w-screen lg:max-w-screen-lg mt-10 space-y-7 mx-auto">

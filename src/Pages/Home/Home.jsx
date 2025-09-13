@@ -9,7 +9,7 @@ import Stats from "./Stats/Stats";
 
 const Home = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <title>Home</title>
       <Banner />
       <Partner />

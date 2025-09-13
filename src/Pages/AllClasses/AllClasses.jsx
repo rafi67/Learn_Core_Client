@@ -3,13 +3,14 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
+import Loading from "../../shared/Loading/Loading";
 
 const AllClasses = () => {
   const { get, patch } = useAxiosSecure();
   const { user } = useAuth();
   const queryClient = useQueryClient();
 
-  const { data: allCourses = [] } = useQuery({
+  const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["allCourses"],
     queryFn: async () =>
       await get(`/allCourses?email=${user.email}`).then((res) => res.data),
@@ -47,6 +48,8 @@ const AllClasses = () => {
   };
 
   let i = 1;
+
+  if(isLoading) return <Loading/>;
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
