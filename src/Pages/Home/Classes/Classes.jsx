@@ -37,7 +37,7 @@ const Classes = () => {
     return () => window.removeEventListener("resize", handleResize); // remove the event listener on unmount
   }, []);
 
-  if(isLoading) return <Loading/>
+  if (isLoading) return <Loading />;
 
   return (
     <div className="w-screen lg:max-w-screen-lg mt-10 space-y-7 mx-auto">
