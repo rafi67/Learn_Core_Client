@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading/Loading";
 
 const Pagination = () => {
-  const { numberOfPages, setItemsPerPage, setCurrentPage } = useAuth();
+  const { numberOfPages, selected, setItemsPerPage, setCurrentPage, setSelected } = useAuth();
 
   const { data: numberOfPage, isLoading } = useQuery({
     queryKey: ["pages", numberOfPages],
@@ -13,6 +13,7 @@ const Pagination = () => {
 
   const handleChange = (e) => {
     const itemCount = parseInt(e.target.value);
+    setSelected(itemCount);
     setItemsPerPage(itemCount);
   };
 
@@ -22,6 +23,7 @@ const Pagination = () => {
     <div className="join">
       {numberOfPage?.map((_, index) => (
         <input
+          key={index}
           className="join-item btn btn-square"
           type="radio"
           name="options"
@@ -36,6 +38,7 @@ const Pagination = () => {
         className="join-item btn btn-square"
         name=""
         id=""
+        defaultValue={selected}
         onChange={handleChange}
       >
         <option value="5">5</option>

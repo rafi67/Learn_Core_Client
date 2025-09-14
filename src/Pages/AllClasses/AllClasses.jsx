@@ -4,18 +4,33 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import Loading from "../../shared/Loading/Loading";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../shared/Pagination/Pagination";
 
 const AllClasses = () => {
   const { get, patch } = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
   const queryClient = useQueryClient();
 
   const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["allCourses"],
     queryFn: async () =>
-      await get(`/allCourses?email=${user.email}`).then((res) => res.data),
+      await get(`/allCourses?email=${user.email}`).then((res) => {
+        queryClient.removeQueries({
+          queryKey: ["pagination"],
+          exact: true,
+        });
+          setCurrentPage(1);
+          setItemsPerPage(5);
+          setSelected(5);
+          const pageNumber = Math.ceil(res.data.length / 5);
+          setNumberOfPages(pageNumber);
+          return res.data;
+      }),
     refetchOnWindowFocus: false,
   });
+
+  const {paginatedData} = usePagination(allCourses);
 
   const patchMutation = useMutation({
     mutationFn: (data) =>
@@ -49,7 +64,7 @@ const AllClasses = () => {
 
   let i = 1;
 
-  if(isLoading) return <Loading/>;
+  if (isLoading) return <Loading />;
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
@@ -70,7 +85,7 @@ const AllClasses = () => {
           </thead>
           <tbody>
             {/* row */}
-            {allCourses.map((data) => (
+            {paginatedData?.map((data) => (
               <tr>
                 <th>{i++}</th>
                 <td>{data.title}</td>
@@ -120,6 +135,7 @@ const AllClasses = () => {
             ))}
           </tbody>
         </table>
+        <Pagination/>
       </div>
     </div>
   );

@@ -2,16 +2,30 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../shared/Pagination/Pagination";
+import Loading from "../../shared/Loading/Loading";
 
 const Users = () => {
   const { get, patch } = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
   const queryClient = useQueryClient();
 
-  const { data: users = [] } = useQuery({
+  const { data: users = [], isLoading } = useQuery({
     queryKey: ["users"],
     queryFn: async () =>
-      await get(`/users?email=${user.email}`).then((res) => res.data),
+      await get(`/users?email=${user.email}`).then((res) => {
+        queryClient.removeQueries({
+          queryKey: ["pagination"],
+          exact: true,
+        });
+        setCurrentPage(1);
+        setItemsPerPage(5);
+        setSelected(5);
+        const pageNumber = Math.ceil(res.data.length / 5);
+        setNumberOfPages(pageNumber);
+        return res.data;
+      }),
     refetchOnWindowFocus: false,
   });
 
@@ -38,6 +52,10 @@ const Users = () => {
     },
   });
 
+  const { paginatedData } = usePagination(users);
+
+  if (isLoading) return <Loading />;
+
   const handleSubmit = (id) => {
     patchMutation.mutate(id);
   };
@@ -61,7 +79,7 @@ const Users = () => {
           </thead>
           <tbody>
             {/* row */}
-            {users.map((data) => (
+            {paginatedData?.map((data) => (
               <tr>
                 <th>{i++}</th>
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
@@ -87,6 +105,7 @@ const Users = () => {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </div>
   );
 };

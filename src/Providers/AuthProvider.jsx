@@ -17,7 +17,8 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(1);
+  const [numberOfPages, setNumberOfPages] = useState(null);
+  const [selected, setSelected] = useState(5);
   const { post } = useAxiosPublic();
 
   const provider = new GoogleAuthProvider();
@@ -80,6 +81,8 @@ const AuthProvider = ({ children }) => {
     itemsPerPage,
     currentPage,
     numberOfPages,
+    selected,
+    setSelected,
     setNumberOfPages,
     setCurrentPage,
     setItemsPerPage,

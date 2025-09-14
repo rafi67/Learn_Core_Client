@@ -2,18 +2,34 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import usePagination from "../../hooks/usePagination";
+import Pagination from "../../shared/Pagination/Pagination";
+import Loading from "../../shared/Loading/Loading";
 
 const TeacherRequest = () => {
   const { get, patch } = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
   const queryClient = useQueryClient();
 
-  const { data: teacherRequest = [] } = useQuery({
+  const { data: teacherRequest = [], isLoading } = useQuery({
     queryKey: ["teacherRequest"],
     queryFn: async () =>
-      await get(`/teacherRequest?email=${user.email}`).then((res) => res.data),
+      await get(`/teacherRequest?email=${user.email}`).then((res) => {
+        queryClient.removeQueries({
+          queryKey: ["pagination"],
+          exact: true,
+        });
+        setCurrentPage(1);
+        setItemsPerPage(5);
+        setSelected(5);
+        const pageNumber = Math.ceil(res.data.length / 5);
+        setNumberOfPages(pageNumber);
+        return res.data;
+      }),
     refetchOnWindowFocus: false,
   });
+
+  const { paginatedData } = usePagination(teacherRequest);
 
   const patchMutation = useMutation({
     mutationFn: (requestData) =>
@@ -37,9 +53,13 @@ const TeacherRequest = () => {
     },
   });
 
+  if (isLoading) return <Loading />;
+
   const handleStatus = (id, status) => {
     patchMutation.mutate({ id, status });
   };
+
+  let i = 1;
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
@@ -62,9 +82,9 @@ const TeacherRequest = () => {
           </thead>
           <tbody>
             {/* row */}
-            {teacherRequest.map((data) => (
+            {paginatedData?.map((data) => (
               <tr>
-                <th></th>
+                <th>{i++}</th>
                 <td className="text-sm md:text-md text-wrap">{data.name}</td>
                 <td>
                   <img
@@ -108,6 +128,7 @@ const TeacherRequest = () => {
           </tbody>
         </table>
       </div>
+      <Pagination />
     </div>
   );
 };
