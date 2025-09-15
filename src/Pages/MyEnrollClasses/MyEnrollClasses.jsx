@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import EnrollClassesCard from "./EnrollClassesCard/EnrollClassesCard";
@@ -9,15 +9,10 @@ import usePagination from "../../hooks/usePagination";
 const MyEnrollClasses = () => {
   const { get } = useAxiosSecure();
   const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
-  const queryClient = useQueryClient();
   const { data: enrollClass = [], isLoading } = useQuery({
     queryKey: ["myEnrollClass"],
     queryFn: async () =>
       get(`/myEnrollClass?email=${user.email}`).then((res) => {
-        queryClient.removeQueries({
-          queryKey: ["pagination"],
-          exact: true,
-        });
         setCurrentPage(1);
         setItemsPerPage(5);
         setSelected(5);

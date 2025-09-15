@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -9,16 +9,11 @@ import Loading from "../../shared/Loading/Loading";
 const Users = () => {
   const { get, patch } = useAxiosSecure();
   const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
-  const queryClient = useQueryClient();
 
-  const { data: users = [], isLoading } = useQuery({
+  const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () =>
       await get(`/users?email=${user.email}`).then((res) => {
-        queryClient.removeQueries({
-          queryKey: ["pagination"],
-          exact: true,
-        });
         setCurrentPage(1);
         setItemsPerPage(5);
         setSelected(5);
@@ -39,7 +34,7 @@ const Users = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      queryClient.invalidateQueries(["users"]);
+      refetch();
     },
     onError: (err) => {
       Swal.fire({

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
@@ -9,16 +9,11 @@ import Loading from "../../shared/Loading/Loading";
 const TeacherRequest = () => {
   const { get, patch } = useAxiosSecure();
   const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
-  const queryClient = useQueryClient();
 
-  const { data: teacherRequest = [], isLoading } = useQuery({
+  const { data: teacherRequest = [], isLoading, refetch } = useQuery({
     queryKey: ["teacherRequest"],
     queryFn: async () =>
       await get(`/teacherRequest?email=${user.email}`).then((res) => {
-        queryClient.removeQueries({
-          queryKey: ["pagination"],
-          exact: true,
-        });
         setCurrentPage(1);
         setItemsPerPage(5);
         setSelected(5);
@@ -42,7 +37,7 @@ const TeacherRequest = () => {
         text: "Teacher request has been accepted successfully.",
         icon: "success",
       });
-      queryClient.invalidateQueries(["teacherRequest"]);
+      refetch();
     },
     onError: (err) => {
       Swal.fire({
