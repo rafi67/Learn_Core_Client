@@ -1,39 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import ClassCard from "./ClassCard/ClassCard";
-import usePagination from "../../hooks/usePagination";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loading from "../../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
 
 const Class = () => {
   const { get } = useAxiosPublic();
-  const { setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
-  const {
-    data: Classes = [],
-    error,
-    isLoading,
-  } = useQuery({
+  const { paginatedData } = useAuth();
+
+  const { data: Classes = [], isLoading } = useQuery({
     queryKey: ["class"],
     queryFn: async () =>
       await get("/allClasses")
-        .then((res) => {
-          setCurrentPage(1);
-          setItemsPerPage(5);
-          setSelected(5);
-          const pageNumber = Math.ceil(res.data.length / 5);
-          setNumberOfPages(pageNumber);
-          return res.data;
-        })
+        .then((res) => res.data)
         .catch((err) => console.log(err)),
     refetchOnWindowFocus: false,
   });
 
-  const { paginatedData } = usePagination(Classes);
-
   if (isLoading) return <Loading />;
-
-  if (error) return <p>Error</p>;
 
   return (
     <div className="mb-10">
@@ -43,7 +28,7 @@ const Class = () => {
           <ClassCard key={cl._id} data={cl} />
         ))}
       </div>
-      <Pagination />
+      <Pagination data={Classes} />
     </div>
   );
 };

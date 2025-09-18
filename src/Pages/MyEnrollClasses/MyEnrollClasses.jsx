@@ -4,26 +4,16 @@ import useAuth from "../../hooks/useAuth";
 import EnrollClassesCard from "./EnrollClassesCard/EnrollClassesCard";
 import Loading from "../../shared/Loading/Loading";
 import Pagination from "../../shared/Pagination/Pagination";
-import usePagination from "../../hooks/usePagination";
 
 const MyEnrollClasses = () => {
   const { get } = useAxiosSecure();
-  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
+  const { user, paginatedData } = useAuth();
   const { data: enrollClass = [], isLoading } = useQuery({
     queryKey: ["myEnrollClass"],
     queryFn: async () =>
-      get(`/myEnrollClass?email=${user.email}`).then((res) => {
-        setCurrentPage(1);
-        setItemsPerPage(5);
-        setSelected(5);
-        const pageNumber = Math.ceil(res.data.length / 5);
-        setNumberOfPages(pageNumber);
-        return res.data;
-      }),
+      get(`/myEnrollClass?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
-
-  const { paginatedData } = usePagination(enrollClass);
 
   if (isLoading) return <Loading />;
 
@@ -35,7 +25,7 @@ const MyEnrollClasses = () => {
           <EnrollClassesCard key={data._id} data={data} />
         ))}
       </div>
-      <Pagination />
+      <Pagination data={enrollClass} />
     </div>
   );
 };

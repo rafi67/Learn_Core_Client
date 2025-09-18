@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import MyClassCard from "./MyClassCard/MyClassCard";
-import usePagination from "../../hooks/usePagination";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loading from "../../shared/Loading/Loading";
 
@@ -10,27 +9,17 @@ const MyClass = () => {
   const { get } = useAxiosSecure();
   const {
     user,
-    setItemsPerPage,
-    setCurrentPage,
-    setNumberOfPages,
-    setSelected,
+    paginatedData
   } = useAuth();
- 
+
   const { data: myClass = [], isLoading } = useQuery({
     queryKey: ["myClass"],
     queryFn: async () =>
       await get(`/myClass?email=${user.email}`).then((res) => {
-        setCurrentPage(1);
-        setItemsPerPage(5);
-        setSelected(5);
-        const pageNumber = Math.ceil(res.data.length / 5);
-        setNumberOfPages(pageNumber);
         return res.data;
       }),
     refetchOnWindowFocus: false,
   });
-
-  const { paginatedData } = usePagination(myClass);
 
   if (isLoading) return <Loading />;
 
@@ -42,7 +31,7 @@ const MyClass = () => {
           <MyClassCard key={data._id} data={data} />
         ))}
       </div>
-      <Pagination/>
+      <Pagination data={myClass} />
     </div>
   );
 };

@@ -21,6 +21,7 @@ import AllClasses from "../Pages/AllClasses/AllClasses";
 import AddClass from "../Pages/AddClass/AddClass";
 import MyClass from "../Pages/MyClass/MyClass";
 import MyClassDetails from "../Pages/MyClassDetails/MyClassDetails";
+import MyOrder from "../Pages/MyOrder/MyOrder";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +83,10 @@ const router = createBrowserRouter([
         path: "studentProfile",
         element: <Profile />,
       },
+      {
+        path: "myOrder",
+        element: <MyOrder />,
+      },
     ],
   },
   {
@@ -108,9 +113,9 @@ const router = createBrowserRouter([
         path: "allClasses",
         element: <AllClasses />,
       },
-       {
+      {
         path: "myClassDetails/:id",
-        element: <MyClassDetails/>
+        element: <MyClassDetails />,
       },
     ],
   },
@@ -132,11 +137,11 @@ const router = createBrowserRouter([
       },
       {
         path: "myClass",
-        element: <MyClass/>
+        element: <MyClass />,
       },
       {
         path: "myClassDetails/:id",
-        element: <MyClassDetails/>
+        element: <MyClassDetails />,
       },
     ],
   },

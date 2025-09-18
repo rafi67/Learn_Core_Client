@@ -2,25 +2,16 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import usePagination from "../../hooks/usePagination";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loading from "../../shared/Loading/Loading";
 
 const Users = () => {
   const { get, patch } = useAxiosSecure();
-  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
-
+  const { user, paginatedData } = useAuth();
   const { data: users = [], isLoading, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () =>
-      await get(`/users?email=${user.email}`).then((res) => {
-        setCurrentPage(1);
-        setItemsPerPage(5);
-        setSelected(5);
-        const pageNumber = Math.ceil(res.data.length / 5);
-        setNumberOfPages(pageNumber);
-        return res.data;
-      }),
+      await get(`/users?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
 
@@ -46,8 +37,6 @@ const Users = () => {
       });
     },
   });
-
-  const { paginatedData } = usePagination(users);
 
   if (isLoading) return <Loading />;
 
@@ -100,7 +89,7 @@ const Users = () => {
           </tbody>
         </table>
       </div>
-      <Pagination />
+      <Pagination data={users} />
     </div>
   );
 };

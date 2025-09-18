@@ -9,6 +9,8 @@ import { IoMdGitPullRequest } from "react-icons/io";
 import { FaUsers } from "react-icons/fa";
 import { MdLibraryAdd } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
+import { BiPurchaseTagAlt } from "react-icons/bi";
+
 const SideDrawer = () => {
   const { userType } = useVerifyUser();
 
@@ -47,6 +49,14 @@ const SideDrawer = () => {
               <NavLink to="/studentDashboard/myEnrollClass">
                 <MdEditDocument />
                 My Enroll Class
+              </NavLink>
+            </li>
+          )}
+          {userType?.role === "student" && (
+            <li>
+              <NavLink to="/studentDashboard/myOrder">
+                <BiPurchaseTagAlt />
+                My Order
               </NavLink>
             </li>
           )}

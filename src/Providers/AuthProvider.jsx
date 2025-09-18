@@ -15,10 +15,7 @@ import AuthContext from "../context/authContext";
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [itemsPerPage, setItemsPerPage] = useState(5);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [numberOfPages, setNumberOfPages] = useState(null);
-  const [selected, setSelected] = useState(5);
+  const [paginatedData, setPaginatedData] = useState(null);
   const { post } = useAxiosPublic();
 
   const provider = new GoogleAuthProvider();
@@ -78,14 +75,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     user,
     loading,
-    itemsPerPage,
-    currentPage,
-    numberOfPages,
-    selected,
-    setSelected,
-    setNumberOfPages,
-    setCurrentPage,
-    setItemsPerPage,
+    paginatedData,
+    setPaginatedData,
     setLoading,
     signInUser,
     signInWithGoogle,

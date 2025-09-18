@@ -1,11 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
-import useAuth from "../../hooks/useAuth";
 import Loading from "../Loading/Loading";
+import usePagination from "../../hooks/usePagination";
 
-const Pagination = () => {
-  const { numberOfPages, selected, setItemsPerPage, setCurrentPage, setSelected } = useAuth();
+const Pagination = ({ data }) => {
 
-  const { data: numberOfPage, isLoading } = useQuery({
+  const {
+    numberOfPages,
+    selected,
+    setSelected,
+    setItemsPerPage,
+    setCurrentPage,
+  } = usePagination(data);
+
+  const { data:  numberOfPage } = useQuery({
     queryKey: ["pages", numberOfPages],
     queryFn: () => [...Array(numberOfPages)],
     refetchOnWindowFocus: false,
@@ -16,8 +23,6 @@ const Pagination = () => {
     setSelected(itemCount);
     setItemsPerPage(itemCount);
   };
-
-  if (isLoading) return <Loading />;
 
   return (
     <div className="join">

@@ -4,33 +4,19 @@ import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router";
 import Swal from "sweetalert2";
 import Loading from "../../shared/Loading/Loading";
-import usePagination from "../../hooks/usePagination";
 import Pagination from "../../shared/Pagination/Pagination";
 
 const AllClasses = () => {
   const { get, patch } = useAxiosSecure();
-  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
+  const { user, paginatedData } = useAuth();
   const queryClient = useQueryClient();
 
   const { data: allCourses = [], isLoading } = useQuery({
     queryKey: ["allCourses"],
     queryFn: async () =>
-      await get(`/allCourses?email=${user.email}`).then((res) => {
-        queryClient.removeQueries({
-          queryKey: ["pagination"],
-          exact: true,
-        });
-          setCurrentPage(1);
-          setItemsPerPage(5);
-          setSelected(5);
-          const pageNumber = Math.ceil(res.data.length / 5);
-          setNumberOfPages(pageNumber);
-          return res.data;
-      }),
+      await get(`/allCourses?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
-
-  const {paginatedData} = usePagination(allCourses);
 
   const patchMutation = useMutation({
     mutationFn: (data) =>
@@ -135,7 +121,7 @@ const AllClasses = () => {
             ))}
           </tbody>
         </table>
-        <Pagination/>
+        <Pagination data={allCourses} />
       </div>
     </div>
   );

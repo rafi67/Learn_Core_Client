@@ -1,6 +1,6 @@
 import { Outlet } from "react-router";
 import Sidebar from "../shared/Sidebar/Sidebar";
-import SideDrawer from "../shared/Sidedrawer/Sidedrawer";
+import SideDrawer from "../shared/SideDrawer/SideDrawer";
 
 const Dashboard = () => {
   return (

@@ -2,29 +2,23 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-import usePagination from "../../hooks/usePagination";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loading from "../../shared/Loading/Loading";
 
 const TeacherRequest = () => {
   const { get, patch } = useAxiosSecure();
-  const { user, setItemsPerPage, setCurrentPage, setNumberOfPages, setSelected } = useAuth();
+  const { user, paginatedData } = useAuth();
 
-  const { data: teacherRequest = [], isLoading, refetch } = useQuery({
+  const {
+    data: teacherRequest = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["teacherRequest"],
     queryFn: async () =>
-      await get(`/teacherRequest?email=${user.email}`).then((res) => {
-        setCurrentPage(1);
-        setItemsPerPage(5);
-        setSelected(5);
-        const pageNumber = Math.ceil(res.data.length / 5);
-        setNumberOfPages(pageNumber);
-        return res.data;
-      }),
+      await get(`/teacherRequest?email=${user.email}`).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
-
-  const { paginatedData } = usePagination(teacherRequest);
 
   const patchMutation = useMutation({
     mutationFn: (requestData) =>
@@ -123,7 +117,7 @@ const TeacherRequest = () => {
           </tbody>
         </table>
       </div>
-      <Pagination />
+      <Pagination data={teacherRequest} />
     </div>
   );
 };
