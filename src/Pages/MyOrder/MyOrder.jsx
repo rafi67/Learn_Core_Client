@@ -4,10 +4,11 @@ import jsPDF from "jspdf";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../shared/Loading/Loading";
 import { applyPlugin } from 'jspdf-autotable';
+import Pagination from "../../shared/Pagination/Pagination";
 
 const MyOrder = () => {
   const { get } = useAxiosSecure();
-  const { user } = useAuth();
+  const { user, paginatedData } = useAuth();
 
   const { data: myOrder, isLoading } = useQuery({
     queryKey: ["myOrder"],
@@ -85,7 +86,7 @@ const MyOrder = () => {
           </thead>
           <tbody>
             {/* row */}
-            {myOrder.map((data) => (
+            {paginatedData?.map((data) => (
               <tr key={data._id}>
                 <th>{i++}</th>
                 <td className="text-sm md:text-md text-wrap">{data.title}</td>
@@ -103,6 +104,7 @@ const MyOrder = () => {
       <button className="btn w-[10%]" onClick={invoice}>
         Invoice
       </button>
+      <Pagination data={myOrder}/>
     </div>
   );
 };
