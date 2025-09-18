@@ -1,6 +1,7 @@
 import CountUp from "react-countup";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
+import Loading from "../../../shared/Loading/Loading";
 
 const Stats = () => {
   const { get } = useAxiosPublic();
@@ -14,7 +15,7 @@ const Stats = () => {
     refetchOnWindowFocus: false,
   });
 
-  if (isPending) return <p>Data Loading</p>;
+  if (isPending) return <Loading/>;
 
   if (error) return <p>{error.message}</p>;
 
@@ -31,8 +32,6 @@ const Stats = () => {
             decimal=","
             duration={3}
             enableScrollSpy
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
           >
             {({ countUpRef }) => (
               <div>
@@ -53,8 +52,6 @@ const Stats = () => {
             end={Count?.totalClass}
             enableScrollSpy
             duration={3}
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
           >
             {({ countUpRef }) => (
               <div>
@@ -75,8 +72,6 @@ const Stats = () => {
             end={Count?.totalEnrollment}
             enableScrollSpy
             duration={3}
-            onEnd={() => console.log("Ended! 👏")}
-            onStart={() => console.log("Started! 💨")}
           >
             {({ countUpRef }) => (
               <div>

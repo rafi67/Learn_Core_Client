@@ -19,12 +19,12 @@ const CheckoutForm = ({ price, id }) => {
   const PostMutation = useMutation({
     mutationFn: (payment) => axiosSecure.post("/payments", payment),
     onSuccess: () => {
-       Swal.fire({
+      Swal.fire({
         title: "Payment Successful",
         icon: "success",
         draggable: true,
       });
-      queryClient.invalidateQueries(['paid']);
+      queryClient.invalidateQueries(["paid"]);
       document.getElementById("my_modal_5").close();
       navigate("/studentDashBoard/myEnrollClass");
     },
@@ -42,10 +42,7 @@ const CheckoutForm = ({ price, id }) => {
     queryFn: async () =>
       await axiosSecure
         .post("/create-payment-intent", { price: price })
-        .then((res) => {
-          console.log("client secret:", res.data.clientSecret);
-          return res.data.clientSecret;
-        }),
+        .then((res) => res.data.clientSecret),
     refetchOnWindowFocus: false,
   });
 
@@ -60,16 +57,14 @@ const CheckoutForm = ({ price, id }) => {
 
     if (card == null) return;
 
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
 
     if (error) {
-      console.log("[error]", error);
       setError(error.message);
     } else {
-      console.log("[PaymentMethod]", paymentMethod);
       setError("");
     }
 
@@ -86,7 +81,6 @@ const CheckoutForm = ({ price, id }) => {
       });
 
     if (paymentError) {
-      console.log([paymentError]);
       document.getElementById("my_modal_5").close();
       Swal.fire({
         title: "Payment Failed! Try again",

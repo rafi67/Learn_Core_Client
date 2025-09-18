@@ -53,9 +53,11 @@ const MyClassDetails = () => {
   const { data: classProgress = [] } = useQuery({
     queryKey: ["classProgress"],
     queryFn: async () =>
-      await get(`${userType?.role=='admin'? url : url2}?email=${user.email}&classId=${id}`).then(
-        (res) => res.data
-      ),
+      await get(
+        `${userType?.role == "admin" ? url : url2}?email=${
+          user.email
+        }&classId=${id}`
+      ).then((res) => res.data),
     refetchOnWindowFocus: false,
   });
 
@@ -78,8 +80,6 @@ const MyClassDetails = () => {
               end={classProgress[0]?.totalEnrollment}
               enableScrollSpy
               duration={3}
-              onEnd={() => console.log("Ended! 👏")}
-              onStart={() => console.log("Started! 💨")}
             >
               {({ countUpRef }) => (
                 <div>
@@ -101,8 +101,6 @@ const MyClassDetails = () => {
               decimal=","
               duration={3}
               enableScrollSpy
-              onEnd={() => console.log("Ended! 👏")}
-              onStart={() => console.log("Started! 💨")}
             >
               {({ countUpRef }) => (
                 <div>
@@ -123,8 +121,6 @@ const MyClassDetails = () => {
               end={classProgress[0]?.totalSubmission}
               enableScrollSpy
               duration={3}
-              onEnd={() => console.log("Ended! 👏")}
-              onStart={() => console.log("Started! 💨")}
             >
               {({ countUpRef }) => (
                 <div>
@@ -139,7 +135,7 @@ const MyClassDetails = () => {
       <button
         className="btn text-white text-md bg-[#137333] rounded-full"
         onClick={() => document.getElementById("my_modal_5").showModal()}
-        disabled={userType?.role=='admin'}
+        disabled={userType?.role == "admin"}
       >
         <FaPlus />
         Create

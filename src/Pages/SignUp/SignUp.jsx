@@ -35,8 +35,7 @@ const SignUp = () => {
   const submit = (data) => {
     const imageFile = { image: data.photo[0] };
     createUser(data.email, data.password)
-      .then(async (result) => {
-        console.log(result.user);
+      .then(async () => {
         const res = await axios.post(image_hosting_api, imageFile, {
           headers: { "content-type": "multipart/form-data" },
         });
@@ -63,7 +62,15 @@ const SignUp = () => {
           navigate("/");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) =>
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
   };
 
   return (

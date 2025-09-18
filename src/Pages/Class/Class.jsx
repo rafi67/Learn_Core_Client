@@ -4,17 +4,30 @@ import ClassCard from "./ClassCard/ClassCard";
 import Pagination from "../../shared/Pagination/Pagination";
 import Loading from "../../shared/Loading/Loading";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Class = () => {
   const { get } = useAxiosPublic();
   const { paginatedData, searchClass } = useAuth();
 
-  const { data: Classes = [], isLoading, isFetched } = useQuery({
+  const {
+    data: Classes = [],
+    isLoading,
+    isFetched,
+  } = useQuery({
     queryKey: ["class", searchClass],
     queryFn: async () =>
       await get(`/allClasses?search=${searchClass}`)
         .then((res) => res.data)
-        .catch((err) => console.log(err)),
+        .catch((err) =>
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${err.message}`,
+            showConfirmButton: false,
+            timer: 1500,
+          })
+        ),
     refetchOnWindowFocus: false,
   });
 
