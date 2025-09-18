@@ -3,6 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import jsPDF from "jspdf";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../shared/Loading/Loading";
+import { applyPlugin } from 'jspdf-autotable';
 
 const MyOrder = () => {
   const { get } = useAxiosSecure();
@@ -18,26 +19,50 @@ const MyOrder = () => {
   if (isLoading) return <Loading />;
 
   const invoice = () => {
-    const doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
+    // Create a new jsPDF instance
+    applyPlugin(jsPDF);
+    const doc = new jsPDF();
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth()+1;
+    const year = today.getFullYear();
 
-    const tableColumn = [
-      "Sl No.",
-      "Title",
-      "Price",
-      "Transaction ID",
-      "Student Email",
-      "Teacher Email",
-    ];
+    // Invoice Header
+    doc.setFontSize(20);
+    doc.text("Invoice", 14, 20);
 
-    const result = [];
-    for (var i = 0; i < myOrder.length; i += 1) {
-      result.id = (i + 1).toString();
-      result.push(Object.assign({}, myOrder[i]));
-    }
+    doc.setFontSize(12);
+    doc.text(`Name: ${user.displayName}`, 14, 30);
+    doc.text(`Date: ${day}-${month}-${year}`, 14, 37);
 
-    doc.table(1, 1, result, tableColumn, { autoSize: true });
+    // Define the table columns and rows
+    const tableColumn = ["Sl No.", "Title", "Price", "Transaction Id", "Email", "Teacher Email"];
+    const tableRows = [];
 
-    doc.save("invoice.pdf");
+    myOrder.map((item, index) => {
+      const rowData = [
+        index+1,
+        item.title,
+        item.price+" BDT",
+        item.transactionId,
+        item.email,
+        item.teacherEmail
+      ];
+      tableRows.push(rowData);
+    });
+
+    // Add the table to the PDF using autoTable
+    doc.autoTable( {
+      head: [tableColumn],
+      body: tableRows,
+      startY: 50, // Position the table vertically
+      theme: 'grid', // Add a grid theme to the table
+    });
+    
+    // Add a total at the bottom
+
+    // Save the PDF
+    doc.save('invoice.pdf');
   };
 
   let i = 1;
