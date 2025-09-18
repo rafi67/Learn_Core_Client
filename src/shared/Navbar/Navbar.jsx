@@ -1,13 +1,14 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useVerifyUser from "../../hooks/useVerifyUser";
 import { useState } from "react";
 
 const Navbar = () => {
-  const { user, logOut } = useAuth();
+  const { user, logOut, setSearchClass } = useAuth();
   const { userType } = useVerifyUser();
 
   const [selected, setSelected] = useState(0);
+  const { pathname } = useLocation();
 
   const handleLogOut = () => {
     logOut()
@@ -105,7 +106,15 @@ const Navbar = () => {
           </li>
         </ul>
       </div>
-      <div className="navbar-end">
+      <div className="navbar-end space-x-6">
+        {pathname.includes("class") && (
+          <input
+            type="text"
+            placeholder="Search"
+            class="input input-bordered w-24 md:w-auto"
+            onChange={(e) => setSearchClass(e.target.value)}
+          />
+        )}
         {user ? (
           <div className="dropdown dropdown-end">
             <div
