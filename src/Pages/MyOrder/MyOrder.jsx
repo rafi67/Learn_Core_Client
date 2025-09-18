@@ -62,7 +62,7 @@ const MyOrder = () => {
     // Add a total at the bottom
 
     // Save the PDF
-    doc.save('invoice.pdf');
+    doc.save(`invoice of ${user.displayName}.pdf`);
   };
 
   let i = 1;
