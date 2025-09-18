@@ -56,7 +56,7 @@ const AuthProvider = ({ children }) => {
           const userInfo = {
             email: currentUser.email,
           };
-          post("/jwt", userInfo).then((res) => {
+          await post("/jwt", userInfo).then((res) => {
             if (res.data.token) {
               localStorage.setItem("access-token", res.data.token);
             }
