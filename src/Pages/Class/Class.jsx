@@ -9,7 +9,7 @@ const Class = () => {
   const { get } = useAxiosPublic();
   const { paginatedData, searchClass } = useAuth();
 
-  const { data: Classes = [], isLoading } = useQuery({
+  const { data: Classes = [], isLoading, isFetched } = useQuery({
     queryKey: ["class", searchClass],
     queryFn: async () =>
       await get(`/allClasses?search=${searchClass}`)
@@ -20,7 +20,7 @@ const Class = () => {
 
   if (isLoading) return <Loading />;
 
-  if (!Classes.length)
+  if (isFetched && !Classes.length)
     return (
       <img
         className="w-screen h-screen"

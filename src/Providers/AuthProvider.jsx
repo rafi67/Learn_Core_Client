@@ -16,7 +16,8 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [paginatedData, setPaginatedData] = useState(null);
-  const [searchClass, setSearchClass] = useState(null);
+  const [searchClass, setSearchClass] = useState("");
+  const [selected, setSelected] = useState(0);
   const { post } = useAxiosPublic();
 
   const provider = new GoogleAuthProvider();
@@ -78,6 +79,8 @@ const AuthProvider = ({ children }) => {
     loading,
     paginatedData,
     searchClass,
+    selected,
+    setSelected,
     setSearchClass,
     setPaginatedData,
     setLoading,

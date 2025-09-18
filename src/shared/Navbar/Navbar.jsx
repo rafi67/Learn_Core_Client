@@ -1,19 +1,33 @@
 import { Link, useLocation } from "react-router";
 import useAuth from "../../hooks/useAuth";
 import useVerifyUser from "../../hooks/useVerifyUser";
-import { useState } from "react";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const { user, logOut, setSearchClass } = useAuth();
+  const { user, logOut, setSearchClass, selected, setSelected } = useAuth();
   const { userType } = useVerifyUser();
-
-  const [selected, setSelected] = useState(0);
   const { pathname } = useLocation();
 
   const handleLogOut = () => {
     logOut()
-      .then((result) => console.log(result))
-      .catch((err) => console.log(err));
+      .then(() =>
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Successfully Logout",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      )
+      .catch((err) =>
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${err.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      );
   };
 
   return (
@@ -111,7 +125,7 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search"
-            class="input input-bordered w-24 md:w-auto"
+            className="input input-bordered w-24 md:w-auto"
             onChange={(e) => setSearchClass(e.target.value)}
           />
         )}
