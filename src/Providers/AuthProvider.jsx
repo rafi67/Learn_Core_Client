@@ -77,6 +77,8 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     paginatedData,
+    searchClass,
+    setSearchClass,
     setPaginatedData,
     setLoading,
     signInUser,

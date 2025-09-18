@@ -7,18 +7,26 @@ import useAuth from "../../hooks/useAuth";
 
 const Class = () => {
   const { get } = useAxiosPublic();
-  const { paginatedData } = useAuth();
+  const { paginatedData, searchClass } = useAuth();
 
   const { data: Classes = [], isLoading } = useQuery({
-    queryKey: ["class"],
+    queryKey: ["class", searchClass],
     queryFn: async () =>
-      await get("/allClasses")
+      await get(`/allClasses?search=${searchClass}`)
         .then((res) => res.data)
         .catch((err) => console.log(err)),
     refetchOnWindowFocus: false,
   });
 
   if (isLoading) return <Loading />;
+
+  if (!Classes.length)
+    return (
+      <img
+        className="w-screen h-screen"
+        src="https://i.ibb.co.com/mVrbjd7G/59563768-9318688.jpg"
+      />
+    );
 
   return (
     <div className="mb-10">
