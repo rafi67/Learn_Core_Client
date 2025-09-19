@@ -4,6 +4,8 @@ import SocialLogin from "../../shared/SocialLogin/SocialLogin";
 import useAuth from "../../hooks/useAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
+import { FaRegEyeSlash } from "react-icons/fa6";
+import { FaRegEye } from "react-icons/fa";
 
 const SignIn = () => {
   const {
@@ -17,8 +19,7 @@ const SignIn = () => {
 
   const showPassword = (e) => {
     e.preventDefault();
-    if (show == "password") setShow("text");
-    else setShow("password");
+    setShow(show === "text" ? "password" : "text");
   };
 
   const { signInUser, setSelected } = useAuth();
@@ -78,50 +79,57 @@ const SignIn = () => {
               {errors.email?.type === "required" && (
                 <p className="text-lg text-red-500">email required</p>
               )}
-              <label className="label">Password</label>
-              <button onClick={showPassword}>
-                <img
-                  src="https://img.icons8.com/?size=100&id=85028&format=png&color=000000"
-                  alt="show password"
-                  className="w-[20px] h-[20px] relative left-72 top-9 z-20"
+              <fieldset className="fieldset">
+                <label className="label">Password</label>
+                <button
+                  className="absolute top-34 right-16 z-20"
+                  onClick={showPassword}
+                >
+                  {show === "text" ? (
+                    <FaRegEyeSlash className="text-xl" />
+                  ) : (
+                    <FaRegEye className="text-xl" />
+                  )}
+                </button>
+                <input
+                  type={show}
+                  className="input"
+                  placeholder="Password"
+                  {...register("password", {
+                    required: true,
+                    minLength: 8,
+                    maxLength: 20,
+                    pattern:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
+                  })}
                 />
-              </button>
-              <input
-                type={show}
-                className="input"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                  minLength: 8,
-                  maxLength: 20,
-                  pattern:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).+$/,
-                })}
-              />
-              {errors.password?.type === "pattern" && (
-                <p className="text-lg text-red-500">
-                  Password must have one lower case, one number and one special
-                  character and at least
-                </p>
-              )}
-              {errors.password?.type === "maxLength" && (
-                <p className="text-lg text-red-500">
-                  Password Minimum Length is 20
-                </p>
-              )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-lg text-red-500">
-                  Password Minimum Length is 8
-                </p>
-              )}
-              {errors.password?.type === "required" && (
-                <p className="text-lg text-red-500">password required</p>
-              )}
+                {errors.password?.type === "pattern" && (
+                  <p className="text-lg text-red-500">
+                    Password must have one lower case, one number and one
+                    special character and at least one upper case.
+                  </p>
+                )}
+                {errors.password?.type === "maxLength" && (
+                  <p className="text-lg text-red-500">
+                    Password Minimum Length is 20
+                  </p>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <p className="text-lg text-red-500">
+                    Password Minimum Length is 8
+                  </p>
+                )}
+                {errors.password?.type === "required" && (
+                  <p className="text-lg text-red-500">password required</p>
+                )}
+              </fieldset>
               <button className="btn bg-[#FDC800] mt-4">Sign In</button>
-              <Link className="text-[14px]" to='/signUp'>Don't have an account, create new</Link>
+              <Link className="text-[14px]" to="/signUp">
+                Don't have an account, create new
+              </Link>
             </form>
             <div className="divider">OR</div>
-              <SocialLogin />
+            <SocialLogin />
           </div>
         </div>
       </div>
