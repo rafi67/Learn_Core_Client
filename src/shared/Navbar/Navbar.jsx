@@ -56,22 +56,63 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a>Item 1</a>
+              <Link
+                to="/"
+                className={`hover:text-[#FDC800] ${
+                  selected == 1 && "bg-[#FDC800]"
+                } hover:bg-transparent`}
+                onClick={() => setSelected(1)}
+              >
+                Home
+              </Link>
             </li>
             <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
+              <Link
+                to="/class"
+                className={`hover:text-[#FDC800] ${
+                  selected == 2 && "bg-[#FDC800]"
+                } hover:bg-transparent`}
+                onClick={() => setSelected(2)}
+              >
+                All Classes
+              </Link>
             </li>
             <li>
-              <a>Item 3</a>
+              <Link
+                to="/teachOnLearnCore"
+                className={`hover:text-[#FDC800] ${
+                  selected == 3 && "bg-[#FDC800]"
+                } hover:bg-transparent`}
+                onClick={() => setSelected(3)}
+              >
+                Teach on LearnCore
+              </Link>
             </li>
+            {user && (
+              <li>
+                <a className="justify-between">{user.displayName}</a>
+              </li>
+            )}
+            {userType?.role === "student" && user && (
+              <li>
+                <Link to="/studentDashboard/myEnrollClass">My Dashboard</Link>
+              </li>
+            )}
+            {userType?.role === "admin" && user && (
+              <li>
+                <Link to="/adminDashboard/teacherRequest">My Dashboard</Link>
+              </li>
+            )}
+            {userType?.role === "teacher" && user && (
+              <li>
+                <Link to="/teacherDashboard/addClass">My Dashboard</Link>
+              </li>
+            )}
+            {user && (
+              <li>
+                <a onClick={handleLogOut}>Logout</a>
+              </li>
+            )}
           </ul>
         </div>
         <Link to="/" className="btn btn-ghost text-xl hidden lg:flex">
