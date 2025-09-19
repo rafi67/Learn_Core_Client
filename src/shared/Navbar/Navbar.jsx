@@ -108,9 +108,15 @@ const Navbar = () => {
                 <Link to="/teacherDashboard/addClass">My Dashboard</Link>
               </li>
             )}
-            {user && (
+            {user ? (
               <li>
                 <a onClick={handleLogOut}>Logout</a>
+              </li>
+            ) : (
+              <li>
+                <Link to="/signIn">
+                  Sign In
+                </Link>
               </li>
             )}
           </ul>

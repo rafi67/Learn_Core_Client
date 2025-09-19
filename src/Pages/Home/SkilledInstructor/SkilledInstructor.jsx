@@ -16,7 +16,9 @@ const SkilledInstructor = () => {
 
   return (
     <div className="w-screen xl:max-w-screen-lg mx-auto mt-20 mb-20">
-      <h1 className="text-4xl font-bold text-center mb-10">Our Skilled Instructor</h1>
+      <h1 className="text-4xl font-bold text-center mb-10">
+        Our Skilled Instructor
+      </h1>
       {/* card section */}
       <Swiper
         pagination={{
@@ -34,10 +36,10 @@ const SkilledInstructor = () => {
       >
         {instructorData.map((i) => (
           <SwiperSlide>
-            <div className="card bg-gray-100 h-[200px] w-[80%] xl:w-[500px] flex flex-col lg:flex-row items-center lg:items-center mx-auto">
+            <div className="card bg-gray-100 h-[200px] w-[80%] xl:w-[500px] flex flex-row items-center lg:items-center mx-auto">
               <figure className="ml-2">
                 <img
-                  className="rounded-full w-[130px] h-[130px]"
+                  className="rounded-full w-[80px] h-[80px] lg:w-[130px] lg:h-[130px]"
                   src={i.photo}
                   alt="Shoes"
                 />

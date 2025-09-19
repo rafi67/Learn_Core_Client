@@ -24,14 +24,14 @@ const Feedback = () => {
         pagination={{
           clickable: true,
         }}
-        // autoplay={true}
+        autoplay={true}
         style={{
           margin: "auto",
           "--swiper-navigation-color": "#FDC800",
           "--swiper-pagination-color": "#FDC800",
         }}
         slidesPerView={1}
-        // loop={true}
+        loop={true}
         className="mySwiper"
       >
         {feedback.map((f) => (
