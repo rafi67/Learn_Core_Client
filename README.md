@@ -1,12 +1,55 @@
-# React + Vite
+# LearnCore
+LearnCore is a MERN-stack platform designed to simplify and improve the way education is managed online. It allows teachers to manage their classes, students to purchase courses and handle assignments, and administrators to monitor class progress. The platform also creates opportunities for anyone to apply as a teacher, making learning and teaching more accessible and organized for everyone.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Live URL
+<a href="https://edumanage-8e130.web.app/">Live</a>
 
-Currently, two official plugins are available:
+## Admin Login
+email: admin@gmail.com
+password: 12345Admin$
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Key Features
+- Sign up or log in using Email/Password or Google Sign-in.
 
-## Expanding the ESLint configuration
+-View Home Page with banners, partners, popular classes, feedback, and platform stats.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-Browse and search All Classes (only approved ones).
+
+-View Class Details with teacher info, price, and enroll in classes.
+
+-Make secure payments for classes and see enrolled classes in the dashboard.
+
+-Access Student Dashboard to view all enrolled classes in card format.
+
+-Click Continue on enrolled classes to see assignments and submit them.
+
+-Give Teaching Evaluation Reports (TER) with ratings and feedback for teachers.
+
+-View and update My Profile with personal details.
+
+-Apply to become a Teacher on LearnCore by filling out an application form.
+
+-(If Teacher) Add new Classes, view/update/delete classes from the Teacher Dashboard.
+
+-(If Teacher) View Class Progress, total enrollments, assignments, and create new assignments for students.
+
+-(If Admin) Manage Teacher Requests (approve/reject applications).
+
+-(If Admin) View and manage all Users (promote to admin, search users).
+
+-(If Admin) View and approve/reject all Classes and track their progress.
+
+-Student can Download invoices for orders.
+
+## Packages
+- react sweet alert-2
+- axios
+- tanstack query
+- swiper js
+- react icons
+- react router
+- react countup
+- react fast marquee
+- react flexible star rating
+- react player
+- react responsive carousel
