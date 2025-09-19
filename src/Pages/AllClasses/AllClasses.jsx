@@ -54,6 +54,7 @@ const AllClasses = () => {
 
   return (
     <div className="w-full lg:w-[90%] md:p-1 lg:p-4 space-y-2">
+      <title>All Classes</title>
       <div className="overflow-x-auto items-start rounded-box border border-base-content/5 bg-base-100">
         <table className="table table-zebra">
           {/* head */}

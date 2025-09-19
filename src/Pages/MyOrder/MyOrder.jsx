@@ -85,7 +85,7 @@ const MyOrder = () => {
 
   return (
     <div className="w-full lg:w-[90%] flex flex-col items-end md:p-1 lg:p-4 space-y-2">
-      <title>Users</title>
+      <title>My Order</title>
       <div className="overflow-x-auto items-start rounded-box border border-base-content/5 bg-base-100">
         <table className="table table-zebra">
           {/* head */}

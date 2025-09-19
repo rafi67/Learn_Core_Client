@@ -45,6 +45,7 @@ const ClassDetails = () => {
       key={classDetails._id}
       className="w-full my-20 flex flex-col lg:flex-row items-start justify-center space-y-4 lg:space-y-0 lg:space-x-10"
     >
+      <title>Class Details</title>
       <div className="hero bg-base-200 w-full lg:w-[50%]">
         <div className="hero-content flex-col lg:flex-col">
           <img src={classDetails.imageUrl} className="w-[96%]" />
