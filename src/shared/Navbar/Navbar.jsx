@@ -172,12 +172,12 @@ const Navbar = () => {
           <input
             type="text"
             placeholder="Search"
-            className="input input-bordered w-24 md:w-auto"
+            className="input input-bordered w-56"
             onChange={(e) => setSearchClass(e.target.value)}
           />
         )}
         {user ? (
-          <div className="dropdown dropdown-end">
+          <div className="dropdown hidden lg:block dropdown-end">
             <div
               tabIndex={0}
               role="button"
