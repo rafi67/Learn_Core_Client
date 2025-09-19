@@ -6,6 +6,7 @@ LearnCore is a MERN-stack platform designed to simplify and improve the way educ
 
 ## Admin Login
 email: admin@gmail.com
+
 password: 12345Admin$
 
 ## Key Features
