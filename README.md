@@ -9,7 +9,7 @@ email: admin@gmail.com
 password: 12345Admin$
 
 ## Key Features
-- Sign up or log in using Email/Password or Google Sign-in.
+-Sign up or log in using Email/Password or Google Sign-in.
 
 -View Home Page with banners, partners, popular classes, feedback, and platform stats.
 
