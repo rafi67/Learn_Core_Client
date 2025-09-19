@@ -8,6 +8,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import CheckoutForm from "./Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import useAuth from "../../hooks/useAuth";
+import useVerifyUser from "../../hooks/useVerifyUser";
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
@@ -16,6 +17,7 @@ const ClassDetails = () => {
   const { user, setSelected } = useAuth();
   const [selected1, setSelected1] = useState(1);
   const { id } = useParams();
+  const { userType } = useVerifyUser();
 
   const { data: paid = false } = useQuery({
     queryKey: ["paid"],
@@ -145,7 +147,7 @@ const ClassDetails = () => {
         )}
       </div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {!paid && (
+      {!paid && userType==="student" && (
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <Elements stripe={stripePromise}>
