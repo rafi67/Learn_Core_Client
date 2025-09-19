@@ -3,7 +3,7 @@ import useAuth from "../../hooks/useAuth";
 import jsPDF from "jspdf";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "../../shared/Loading/Loading";
-import { applyPlugin } from 'jspdf-autotable';
+import { applyPlugin } from "jspdf-autotable";
 import Pagination from "../../shared/Pagination/Pagination";
 
 const MyOrder = () => {
@@ -19,13 +19,21 @@ const MyOrder = () => {
 
   if (isLoading) return <Loading />;
 
+  if (!myOrder.length)
+    return (
+      <img
+        className="w-screen h-screen"
+        src="https://i.ibb.co.com/jvbpXwr3/12083608-Wavy-Bus-26-Single-11.jpg"
+      />
+    );
+
   const invoice = () => {
     // Create a new jsPDF instance
     applyPlugin(jsPDF);
     const doc = new jsPDF();
     const today = new Date();
     const day = today.getDate();
-    const month = today.getMonth()+1;
+    const month = today.getMonth() + 1;
     const year = today.getFullYear();
 
     // Invoice Header
@@ -37,29 +45,36 @@ const MyOrder = () => {
     doc.text(`Date: ${day}-${month}-${year}`, 14, 37);
 
     // Define the table columns and rows
-    const tableColumn = ["Sl No.", "Title", "Price", "Transaction Id", "Email", "Teacher Email"];
+    const tableColumn = [
+      "Sl No.",
+      "Title",
+      "Price",
+      "Transaction Id",
+      "Email",
+      "Teacher Email",
+    ];
     const tableRows = [];
 
     myOrder.map((item, index) => {
       const rowData = [
-        index+1,
+        index + 1,
         item.title,
-        item.price+" BDT",
+        item.price + " BDT",
         item.transactionId,
         item.email,
-        item.teacherEmail
+        item.teacherEmail,
       ];
       tableRows.push(rowData);
     });
 
     // Add the table to the PDF using autoTable
-    doc.autoTable( {
+    doc.autoTable({
       head: [tableColumn],
       body: tableRows,
       startY: 50, // Position the table vertically
-      theme: 'grid', // Add a grid theme to the table
+      theme: "grid", // Add a grid theme to the table
     });
-    
+
     // Add a total at the bottom
 
     // Save the PDF
@@ -104,7 +119,7 @@ const MyOrder = () => {
       <button className="btn w-[10%]" onClick={invoice}>
         Invoice
       </button>
-      <Pagination data={myOrder}/>
+      <Pagination data={myOrder} />
     </div>
   );
 };
