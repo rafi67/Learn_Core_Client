@@ -68,6 +68,7 @@ const MyClassDetails = () => {
 
   return (
     <div className="p-4">
+      <title>Class Progress</title>
       <h1 className="text-4xl font-bold">Class Progress</h1>
       <div className="flex flex-col lg:flex-row space-y-4 space-x-4 mt-20 justify-center">
         {/* total enrollments */}
