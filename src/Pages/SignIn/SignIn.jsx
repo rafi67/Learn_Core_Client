@@ -21,7 +21,7 @@ const SignIn = () => {
     else setShow("password");
   };
 
-  const { signInUser } = useAuth();
+  const { signInUser, setSelected } = useAuth();
 
   const navigate = useNavigate();
 
@@ -40,6 +40,7 @@ const SignIn = () => {
           timer: 1500,
         });
         reset();
+        setSelected(0);
         navigate(from);
       })
       .catch(() => {

@@ -1,12 +1,14 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 
 const SocialLogin = () => {
-  const { signInWithGoogle } = useAuth();
+  const { signInWithGoogle, setSelected } = useAuth();
   const { post } = useAxiosSecure();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleSubmit = () => {
     signInWithGoogle()
@@ -24,7 +26,8 @@ const SocialLogin = () => {
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate("/");
+        setSelected(0);
+        navigate(from);
       })
       .catch((err) =>
         Swal.fire({

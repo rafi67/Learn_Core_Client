@@ -22,7 +22,7 @@ const SignUp = () => {
     else setShow("password");
   };
 
-  const { createUser, updateUserProfile } = useAuth();
+  const { createUser, updateUserProfile, setSelected } = useAuth();
 
   const { post } = useAxiosSecure();
 
@@ -59,6 +59,7 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          setSelected(0);
           navigate("/");
         }
       })
