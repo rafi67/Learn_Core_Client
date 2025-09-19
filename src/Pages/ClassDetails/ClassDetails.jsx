@@ -13,8 +13,8 @@ const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
 const ClassDetails = () => {
   const { get } = useAxiosSecure();
-  const { user } = useAuth();
-  const [selected, setSelected] = useState(1);
+  const { user, setSelected } = useAuth();
+  const [selected1, setSelected1] = useState(1);
   const { id } = useParams();
 
   const { data: paid = false } = useQuery({
@@ -29,7 +29,10 @@ const ClassDetails = () => {
   const { data = [], isLoading } = useQuery({
     queryKey: ["classDetails"],
     queryFn: async () =>
-      await get(`/classDetails/${id}`).then((res) => res.data),
+      await get(`/classDetails/${id}`).then((res) => {
+        setSelected(0);
+        return res.data;
+      }),
     refetchOnWindowFocus: false,
   });
 
@@ -47,21 +50,21 @@ const ClassDetails = () => {
           <div role="tablist" className="tabs tabs-border">
             <a
               role="tab"
-              onClick={() => setSelected(1)}
-              className={`tab ${selected == 1 && "tab-active"}`}
+              onClick={() => setSelected1(1)}
+              className={`tab ${selected1 == 1 && "tab-active"}`}
             >
               Overview
             </a>
             <a
               role="tab"
-              onClick={() => setSelected(2)}
-              className={`tab ${selected == 2 && "tab-active"}`}
+              onClick={() => setSelected1(2)}
+              className={`tab ${selected1 == 2 && "tab-active"}`}
             >
               Teacher
             </a>
           </div>
           {/* overview and instructor section */}
-          {selected == 1 ? (
+          {selected1 == 1 ? (
             <div>
               <div className="flex space-x-2">
                 <div className="flex items-center space-x-1">
