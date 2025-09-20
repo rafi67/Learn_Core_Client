@@ -43,7 +43,7 @@ password: 12345Admin$
 -Student can Download invoices for orders.
 
 ## Packages
-- react sweet alert-2
+- sweet alert-2
 - axios
 - tanstack query
 - swiper js
