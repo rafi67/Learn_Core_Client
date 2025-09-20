@@ -38,12 +38,14 @@ const SideDrawer = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink to="/class">
-              <MdClass />
-              All Classes
-            </NavLink>
-          </li>
+          {userType?.role !== "admin" && (
+            <li>
+              <NavLink to="/class">
+                <MdClass />
+                All Classes
+              </NavLink>
+            </li>
+          )}
           {userType?.role === "student" && (
             <li>
               <NavLink to="/studentDashboard/myEnrollClass">
