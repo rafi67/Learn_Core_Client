@@ -94,7 +94,7 @@ const TeachOnLearnCore = () => {
   return (
     <div className="hero bg-base-200 min-h-screen">
       <title>Teach on LearnCore</title>
-      <div className="hero-content w-[50%] flex-col lg:flex-row-reverse">
+      <div className="hero-content w-full md:w-[50%] flex-col lg:flex-row-reverse">
         <div
           className={`card bg-base-100 w-full ${
             userType?.role === "teacher" && "hidden"
