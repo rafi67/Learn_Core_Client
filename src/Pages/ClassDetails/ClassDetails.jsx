@@ -117,7 +117,7 @@ const ClassDetails = () => {
         </div>
       </div>
       {/* pay section */}
-      <div className="hero bg-base-200 w-full lg:w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4">
+      <div className={`hero bg-base-200 ${userType?.role==="teacher" || userType?.role==="admin" ? "hidden" : "block"} w-full lg:w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4`}>
         {!paid ? (
           <>
             <div role="tablist" className="tabs tabs-border">
@@ -139,16 +139,19 @@ const ClassDetails = () => {
             </button>
           </>
         ) : (
-          <Link
-            to={`/studentDashboard/enrollClassDetails/${id}`}
-            className="btn bg-[#FDC800] w-full text-lg"
-          >
-            Class Details
-          </Link>
+          userType?.role !== "teacher" &&
+          userType?.role !== "admin" && (
+            <Link
+              to={`/studentDashboard/enrollClassDetails/${id}`}
+              className="btn bg-[#FDC800] w-full text-lg"
+            >
+              Class Details
+            </Link>
+          )
         )}
       </div>
       {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {!paid && userType==="student" && (
+      {!paid && (
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
             <Elements stripe={stripePromise}>
