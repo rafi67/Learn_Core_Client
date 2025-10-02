@@ -18,12 +18,15 @@ const CheckoutForm = ({ price, id }) => {
 
   const PostMutation = useMutation({
     mutationFn: (payment) => axiosSecure.post("/payments", payment),
-    onSuccess: () => {
+    onSuccess: (data) => {
       Swal.fire({
         title: "Payment Successful",
         icon: "success",
         draggable: true,
       });
+
+      axiosSecure.get(`/send-payment-email?email=${user.email}&paymentId=${data.data.insertedId}`);
+
       queryClient.invalidateQueries(["paid"]);
       document.getElementById("my_modal_5").close();
       navigate("/studentDashBoard/myEnrollClass");
