@@ -9,6 +9,7 @@ import CheckoutForm from "./Payment/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import useAuth from "../../hooks/useAuth";
 import useVerifyUser from "../../hooks/useVerifyUser";
+import SSLCOM from "./Payment/SSLCOM";
 
 const stripePromise = loadStripe(import.meta.env.VITE_payment_gateway_pk);
 
@@ -37,6 +38,14 @@ const ClassDetails = () => {
       }),
     refetchOnWindowFocus: false,
   });
+
+  const handleChange = (e) => {
+    const paymentType = e.target.value;
+    if (paymentType === "Stripe")
+      document.getElementById("my_modal_5").showModal();
+    else document.getElementById("my_modal_6").showModal();
+    document.getElementById("my_modal_2").close();
+  };
 
   if (isLoading) return <Loading />;
 
@@ -117,7 +126,13 @@ const ClassDetails = () => {
         </div>
       </div>
       {/* pay section */}
-      <div className={`hero bg-base-200 ${userType?.role==="teacher" || userType?.role==="admin" ? "hidden" : "block"} w-full lg:w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4`}>
+      <div
+        className={`hero bg-base-200 ${
+          userType?.role === "teacher" || userType?.role === "admin"
+            ? "hidden"
+            : "block"
+        } w-full lg:w-[30%] flex flex-col items-start border-1 border-gray-300 p-4 space-y-4`}
+      >
         {!paid ? (
           <>
             <div role="tablist" className="tabs tabs-border">
@@ -133,7 +148,7 @@ const ClassDetails = () => {
 
             <button
               className="btn bg-[#FDC800] w-full text-lg"
-              onClick={() => document.getElementById("my_modal_5").showModal()}
+              onClick={() => document.getElementById("my_modal_2").showModal()}
             >
               Pay
             </button>
@@ -154,12 +169,28 @@ const ClassDetails = () => {
       {!paid && (
         <dialog id="my_modal_2" className="modal">
           <div className="modal-box">
-            <Elements stripe={stripePromise}>
-              <CheckoutForm id={id} price={classDetails.price} />
-            </Elements>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend text-xl">
+                Select a payment gateway
+              </legend>
+              <select
+                name="payment"
+                defaultValue="Select a payment gateway"
+                className="select"
+                onChange={handleChange}
+              >
+                <option disabled={true}>Select a payment gateway</option>
+                <option value="Stripe">Stripe</option>
+                <option value="SSLCOMMERZ">SSLCOMMERZ</option>
+              </select>
+            </fieldset>
           </div>
         </dialog>
       )}
+      <Elements stripe={stripePromise}>
+        <CheckoutForm id={id} price={classDetails.price} />
+      </Elements>
+      <SSLCOM id={id} price={classDetails.price} title={classDetails.title}/>
     </div>
   ));
 };

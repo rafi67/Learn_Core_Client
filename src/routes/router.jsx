@@ -22,6 +22,8 @@ import AddClass from "../Pages/AddClass/AddClass";
 import MyClass from "../Pages/MyClass/MyClass";
 import MyClassDetails from "../Pages/MyClassDetails/MyClassDetails";
 import MyOrder from "../Pages/MyOrder/MyOrder";
+import SSLCOMPaymentSuccess from "../Pages/SSLCOMPaymentSuccess/SSLCOMPaymentSuccess";
+import PaymentCancel from "../Pages/PaymentCancel/PaymentCancel";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,30 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <TeachOnLearnCore />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "success-payment",
+        element: (
+          <PrivateRoute>
+            <SSLCOMPaymentSuccess />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "cancel",
+        element: (
+          <PrivateRoute>
+            <PaymentCancel />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "fail",
+        element: (
+          <PrivateRoute>
+            <PaymentCancel />
           </PrivateRoute>
         ),
       },

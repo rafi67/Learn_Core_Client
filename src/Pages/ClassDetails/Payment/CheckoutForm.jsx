@@ -17,7 +17,7 @@ const CheckoutForm = ({ price, id }) => {
   const queryClient = useQueryClient();
 
   const PostMutation = useMutation({
-    mutationFn: (payment) => axiosSecure.post("/payments", payment),
+    mutationFn: (payment) => axiosSecure.post(`/payments?email=${user.email}&paymentGateway=${"sslcommerz"}`, payment),
     onSuccess: (data) => {
       Swal.fire({
         title: "Payment Successful",
