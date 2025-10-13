@@ -7,7 +7,7 @@ const useAxiosSecure = () => {
   const navigate = useNavigate();
 
   const axiosSecure = axios.create({
-    baseURL: import.meta.env.VITE_server_url,
+    baseURL: import.meta.env.VITE_local_url,
   });
 
   axiosSecure.interceptors.request.use(
