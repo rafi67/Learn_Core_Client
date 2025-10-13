@@ -65,11 +65,7 @@ const router = createBrowserRouter([
       },
       {
         path: "success-payment",
-        element: (
-          <PrivateRoute>
-            <SSLCOMPaymentSuccess />
-          </PrivateRoute>
-        ),
+        element: <SSLCOMPaymentSuccess />,
       },
       {
         path: "cancel",
