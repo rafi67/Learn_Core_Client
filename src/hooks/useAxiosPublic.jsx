@@ -2,7 +2,7 @@ import axios from "axios";
 
 const useAxiosPublic = () => {
   const axiosPublic = axios.create({
-    baseURL: import.meta.env.VITE_local_url,
+    baseURL: import.meta.env.VITE_server_url,
   });
   return axiosPublic;
 };
